@@ -42,6 +42,11 @@ export class AuthService {
   constructor() {
     effect(() => {
       localStorage.setItem('meduser',JSON.stringify(this.state$()))
-    });
-  }
+    
+    }
+  );
+}
+      
+
+  
 }

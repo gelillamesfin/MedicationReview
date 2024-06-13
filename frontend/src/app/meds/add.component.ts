@@ -37,7 +37,7 @@ export class AddComponent {
   isLinear = false;
 
   onAdd() {
-    console.log('add trigered', this.firstFormGroup.value);
+ 
     this.#medService
       .addMed(this.firstFormGroup.value as newMed)
       .subscribe((response) => {
