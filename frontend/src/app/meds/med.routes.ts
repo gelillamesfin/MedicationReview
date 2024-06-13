@@ -8,7 +8,7 @@ export const meds_routes: Routes = [
   {
     path: 'update/:medication_id',
     loadComponent: () =>
-      import('./update.component').then((c) => c.UpdateComponent),
+      import('./update.component').then(c=> c.UpdateComponent),
   }
   ,
   // {

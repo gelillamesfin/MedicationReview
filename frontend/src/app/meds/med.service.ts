@@ -24,8 +24,8 @@ export class MedService {
   readonly #http = inject(HttpClient);
 
   getMeds$(first_letter: string = 'A') {
-    this.#http.get(
-      environment['BACKEND-SERVER_URL'] + `/medications/${first_letter}`
+   return  this.#http.get<{success:boolean,data:Medication[]}>(
+      environment['BACKEND-SERVER_URL'] + `/medications/?${first_letter}`
     );
   }
 
