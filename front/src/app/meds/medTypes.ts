@@ -13,6 +13,7 @@ export type Review = {
 };
 export type Owner = { user_id: string; fullname: string; email: string };
 export type Medication = {
+  _id?:string;
   name: string;
   first_letter: string;
   generic_name: string;
@@ -30,4 +31,13 @@ export type newMed = {
   generic_name: string;
   medication_class: string;
   availability: string;
+};
+//needed a type for input  (update) id
+export type Med = {
+  _id?: string;
+  name: string;
+  generic_name: string;
+  medication_class: string;
+  availability: string;
+  image: Image;
 };

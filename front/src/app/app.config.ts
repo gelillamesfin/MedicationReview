@@ -13,16 +13,15 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { AuthService } from './auth/auth.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
-// const bootstrap = () => {
-//   const auth = inject(AuthService);
-//   return () => {
-//     const persisted_state = localStorage.getItem('workshop3');
-//     console.log(persisted_state,'???????????')
-//     if (persisted_state) {
-//       auth.state$.set(JSON.parse(persisted_state));
-//     }
-//   };
-// };
+const bootstrap = () => {
+  const auth = inject(AuthService);
+  return () => {
+    const persisted_state = localStorage.getItem('meduser');
+    if (persisted_state) {
+      auth.state$.set(JSON.parse(persisted_state));
+    }
+  };
+};
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -30,6 +29,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([addTokenInterceptor])),
     provideToastr(),
     provideAnimations(), provideAnimationsAsync(),
-    // { provide: APP_INITIALIZER, multi: true, useFactory: bootstrap },
+    { provide: APP_INITIALIZER, multi: true, useFactory: bootstrap },
   ],
 };

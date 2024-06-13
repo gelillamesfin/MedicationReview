@@ -2,7 +2,7 @@
 POST http://localhost:3000/users/signin
 Content-Type: application/json
 
-{"email": "asaad@miu.edu", "password": "123456"}
+{"email": "gelilla@gmail.com", "password": "123456"}
 
 ###
 @authToken = {{login.response.body.data}}
@@ -42,7 +42,7 @@ Content-Type: image/png
 }
 ###
 
-GET http://localhost:3000/medications?first_letter=A
+GET http://localhost:3000/medications?first_letter=b
 ###
 
 GET http://localhost:3000/medications/6553c1f160d95c7bea24f667
