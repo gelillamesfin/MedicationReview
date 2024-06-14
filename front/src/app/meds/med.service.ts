@@ -36,7 +36,7 @@ export class MedService {
     );
   }
 
-  addMed(newMed: newMed) {
+  addMed(newMed:FormData) {
     return this.#http.post<{ success: boolean; data: Medication }>(
       environment['BACKEND-SERVER_URL'] + '/medications',
       newMed

@@ -59,6 +59,20 @@
       </div>
     </form>
   </mat-step> 
+<!-- image starts here -->
+
+    <mat-step [stepControl]="firstFormGroup" >
+    <form [formGroup]="firstFormGroup">
+
+        <input type="file" formControlName="image" (change)="setFile($event)" />
+      <button type="submit" (click)="onUpload()">upload</button>
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step> 
+
 
 
 

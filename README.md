@@ -93,6 +93,8 @@ response_body = { "success": boolean, "data": User } // JWT token
 // POST /medications
 request_body = { "name": string, "generic_name": string, "medication_class": string, "availability": string }
 request_multipart = "medication_image"
+
+
 response_body = { "success": boolean, "data": Medication }
 
 // GET /medications?first_letter=A
