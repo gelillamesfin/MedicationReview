@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Medication, newMed } from './medTypes';
+ 
 
 
 
@@ -22,23 +23,10 @@ export const initalMedState: Medication = {
 })
 export class MedService {
   $meds = signal<Medication[]>([initalMedState]);
-  $allMeds=signal<Medication[]>([])
+  allMeds$= signal<any>([initalMedState]);
   readonly #http = inject(HttpClient);
 
 
-// getAll$(){
-//   console.log('inside get all...')
-// const alphabets=['b','c','d']
-// for(let letter of alphabets){
-// const all= (this.getMeds$(letter)).subscribe(response=>{
-//   if(response.success){
-
-//     this.$allMeds.set(response.data)
-//   }
-// console.log('data from all meds',all)
-// })
-// }
-// }
 
 
   getMeds$(first_letter: string = 'A') {
@@ -60,15 +48,17 @@ export class MedService {
       environment['BACKEND-SERVER_URL'] + `/medications/${_id}`
     );
   }
-  updateMedById(Med:newMed,_id:string) {
-   return  this.#http.put<{ success: boolean; data: Medication }>(
-      environment['BACKEND-SERVER_URL'] + `/medications/${_id}`,Med
+  updateMedById(Med: newMed, _id: string) {
+    return this.#http.put<{ success: boolean; data: Medication }>(
+      environment['BACKEND-SERVER_URL'] + `/medications/${_id}`,
+      Med
     );
-    
   }
 
-  deleteMedById(_id:string){
-return this.#http.delete<{success:boolean;data:boolean}>(environment['BACKEND-SERVER_URL']+`/medications/${_id}`)
+  deleteMedById(_id: string) {
+    return this.#http.delete<{ success: boolean; data: boolean }>(
+      environment['BACKEND-SERVER_URL'] + `/medications/${_id}`
+    );
   }
   constructor() {}
 }

@@ -35,7 +35,6 @@ import { ToastrService } from 'ngx-toastr';
           <span [ngStyle]="{ 'font-weight': 'bold' }">Medication Class: </span>
           {{ med.medication_class }}
           <p></p>
-<p>Reviews</p>
 
           @if(auth.is_logged_in()){
           <div>
@@ -52,6 +51,7 @@ import { ToastrService } from 'ngx-toastr';
             ><br /> 
           </div>
           }
+          <p>Reviews</p>
         </mat-card-content>
       </mat-card>
     </div>
@@ -100,22 +100,22 @@ export class MedComponent {
     }
   }
   onReview(_id: any) {
-    if(_id){
-      this.router.navigate(['','medications','reviews','update',_id])
+    if (_id) {
+      this.router.navigate(['', 'medications', 'reviews', 'add', _id]);
     }
   }
   onDelete(medication_id: any) {
-    const confirmation:any=confirm('are you sure ')
+    const confirmation: any = confirm('are you sure ');
     if (medication_id && confirmation) {
       this.#medService.deleteMedById(medication_id).subscribe((response) => {
         if (response.success) {
-          this.#notification.success('deleted successfully')
+          this.#notification.success('deleted successfully');
 
-          this.#medService.$meds.update((oldMeds) => 
-            oldMeds.filter((med) => med._id !== medication_id));
-          this.router.navigate(['','medications','list'])
+          this.#medService.$meds.update((oldMeds) =>
+            oldMeds.filter((med) => med._id !== medication_id)
+          );
+          this.router.navigate(['', 'medications', 'list']);
         }
-
       });
     }
   }

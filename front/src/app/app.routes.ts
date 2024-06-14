@@ -38,5 +38,5 @@ export const routes: Routes = [
     loadChildren: () => import('./meds/med.routes').then((r) => r.meds_routes),
     //  canActivate: [() => inject(AuthService).is_logged_in()],
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'medications/list' },
 ];

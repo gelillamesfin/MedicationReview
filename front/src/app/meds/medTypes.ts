@@ -15,7 +15,7 @@ export type Owner = { user_id: string; fullname: string; email: string };
 export type Medication = {
   _id?:string;
   name: string;
-  first_letter: string;
+  first_letter?: string;
   generic_name: string;
   medication_class: string;
   availability: string;

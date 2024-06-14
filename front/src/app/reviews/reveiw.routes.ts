@@ -7,7 +7,7 @@ import { inject } from '@angular/core';
 export const meds_routes: Routes = [
   
   {
-    path: 'add',
+    path: 'add/:_id',
     loadComponent: () =>
       import('./addreview.component').then((c) => c.AddReviewComponent),
   },

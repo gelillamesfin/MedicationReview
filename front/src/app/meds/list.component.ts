@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Medication } from './medTypes';
 import { MatGridListModule } from '@angular/material/grid-list';
+
 export interface Tile {
   color: string;
   cols: number;
@@ -16,32 +17,31 @@ export interface Tile {
   imports: [MatGridListModule, RouterLink],
   template: `
     <nav>
-      <button><a [routerLink]="['', 'medications', 'A']">A</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">B</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">C</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">D</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">E</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">F</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">G</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">H</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">I</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">J</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">K</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">L</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">M</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">N</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">O</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">P</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">Q</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">R</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">S</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">T</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">U</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">V</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">W</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">X</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">Y</a></button>
-      <button><a [routerLink]="['', 'medications', 'A']">Z</a></button>
+      <button (click)="getMedsForLetter('A')">A</button>
+      <button (click)="getMedsForLetter('B')">B</button>
+      <button (click)="getMedsForLetter('C')">C</button>
+      <button (click)="getMedsForLetter('D')">D</button>
+      <button (click)="getMedsForLetter('E')">E</button>
+      <button (click)="getMedsForLetter('F')">F</button>
+      <button (click)="getMedsForLetter('G')">G</button>
+      <button (click)="getMedsForLetter('H')">H</button>
+      <button (click)="getMedsForLetter('I')">I</button>
+      <button (click)="getMedsForLetter('J')">J</button>
+      <button (click)="getMedsForLetter('K')">K</button>
+      <button (click)="getMedsForLetter('L')">L</button>
+      <button (click)="getMedsForLetter('M')">M</button>
+      <button (click)="getMedsForLetter('N')">N</button>
+      <button (click)="getMedsForLetter('O')">O</button>
+      <button (click)="getMedsForLetter('P')">P</button>
+      <button (click)="getMedsForLetter('Q')">Q</button>
+      <button (click)="getMedsForLetter('R')">R</button>
+      <button (click)="getMedsForLetter('S')">S</button>
+      <button (click)="getMedsForLetter('T')">T</button>
+      <button (click)="getMedsForLetter('U')">U</button>
+      <button (click)="getMedsForLetter('V')">V</button>
+      <button (click)="getMedsForLetter('W')">W</button>
+      <button (click)="getMedsForLetter('X')">X</button>
+      <button (click)="getMedsForLetter('Z')">Z</button>
 
       <!-- fix route   -->
     </nav>
@@ -53,10 +53,8 @@ export interface Tile {
         </li>
       </ul>
       }
-
-
+  
     </div>
-
   `,
   styles: `
   nav{
@@ -73,14 +71,40 @@ export interface Tile {
 })
 export class ListComponent {
   readonly medService = inject(MedService);
-  readonly #router = inject(Router);
-  readonly #notifcation = inject(ToastrService);
-  $meds = signal<Medication[]>([]);
 
+  $meds = signal<Medication[]>([]);
+  $allMeds = signal<Medication[]>([]);
   constructor() {
     this.medService.getMeds$().subscribe((response) => {
       this.$meds.set(response.data);
     });
   }
+  getMedsForLetter(letter: string) {
+    this.medService.getMeds$(letter).subscribe((response) => {
+      this.$meds.set(response.data);
+    });
+  }
 
+  // getAll$() {
+  //   console.log('inside get all...');
+  //   const alphabets = 'abcdefghigklmnopqrstuvwxyz'.split('');
+ 
+
+  //   for (let letter of alphabets) {
+  //     this.medService.getMeds$(letter).subscribe((response) => {
+  //       if(response.success){
+
+  //         // this.$allMeds.set(response.data)
+  //         this.$allMeds.update((old)=>{
+  //           return [...old,response.data]
+  //         })
+  //         console.log(response.data)
+  //       }
+  //       });
+  //     }
+  // }
+// ngOnInit(){
+// this.getAll$()
+
+// }
 }

@@ -19,13 +19,13 @@ export const meds_routes: Routes = [
     path: ':_id',
     loadComponent: () => import('./med.component').then((c) => c.MedComponent),
   },
-  {
-    path: 'reviews/list',
-    loadComponent: () =>
-      import('../reviews/review-list.component').then(
-        (c) => c.ReviewListComponent
-      ),
-  },
+  // {
+  //   path: 'reviews/list',
+  //   loadComponent: () =>
+  //     import('../reviews/review-list.component').then(
+  //       (c) => c.ReviewListComponent
+  //     ),
+  // },
   {
     path: 'reviews',
     loadChildren: () =>
