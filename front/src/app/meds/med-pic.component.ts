@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-med-review',
+  selector: 'app-med-pic',
   standalone: true,
   imports: [],
   template: `
     <p>
-      med-review works!
+      med-pic works!
     </p>
   `,
   styles: ``
 })
-export class MedReviewComponent {
+export class MedPicComponent {
 
 }

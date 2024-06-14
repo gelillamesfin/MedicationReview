@@ -4,29 +4,31 @@ import { inject } from '@angular/core';
 
 export const meds_routes: Routes = [
   {
-    path:'add',
+    path: 'add',
     loadComponent: () => import('./add.component').then((c) => c.AddComponent),
   },
-  // {
-  //   path:'update/:medication_id',
-  //   loadComponent: () =>
-  //     import('./update.component').then((c) => c.UpdateComponent),
-  // },
-  // {
-  //   path: ':medication_id',
-  //   loadComponent: () => import('./med.component').then((c) => c.MedComponent),
-  // },
+
   {
-    path:':medication_id/reviews',
+    path: 'update/:_id',
     loadComponent: () =>
-      import('./med-review.component').then((c) => c.MedReviewComponent),
+      import('./update.component').then((c) => c.UpdateComponent),
+    canActivate: [() => inject(AuthService).is_logged_in()],
   },
+
   {
-    path:'update/:_id', loadComponent:()=>import('./update.component').then(c=>c.UpdateComponent),
-    canActivate:[()=>inject(AuthService).is_logged_in()]
-  },
-  {
-    path:':medication_id',
+    path: ':_id',
     loadComponent: () => import('./med.component').then((c) => c.MedComponent),
+  },
+  {
+    path: 'reviews/list',
+    loadComponent: () =>
+      import('../reviews/review-list.component').then(
+        (c) => c.ReviewListComponent
+      ),
+  },
+  {
+    path: 'reviews',
+    loadChildren: () =>
+      import('../reviews/reveiw.routes').then((r) => r.meds_routes),
   },
 ];

@@ -2,7 +2,7 @@
 POST http://localhost:3000/users/signin
 Content-Type: application/json
 
-{"email": "gelilla@gmail.com", "password": "123456"}
+{"email": "mesfin@gmail.com", "password": "123456"}
 
 ###
 @authToken = {{login.response.body.data}}
@@ -62,12 +62,12 @@ Authorization: Bearer {{authToken}}
     "availability": "OTC"
 }
 ###
-POST http://localhost:3000/medications/655395d592e2a55a63837a75/reviews
+POST http://localhost:3000/medications/666a7198cd14599a214e747d/reviews
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "review": "Helps me with migraine",
+    "review": "does the job",
     "rating": 9
 }
 

@@ -16,8 +16,8 @@ export interface Tile {
   imports: [MatGridListModule, RouterLink],
   template: `
     <nav>
-      <button><a [routerLink]="['', 'medications','A']">A</a></button>
-      <button><a [routerLink]="['', 'medications','A']">B</a></button>
+      <button><a [routerLink]="['', 'medications', 'A']">A</a></button>
+      <button><a [routerLink]="['', 'medications', 'A']">B</a></button>
       <button><a [routerLink]="['', 'medications', 'A']">C</a></button>
       <button><a [routerLink]="['', 'medications', 'A']">D</a></button>
       <button><a [routerLink]="['', 'medications', 'A']">E</a></button>
@@ -48,23 +48,15 @@ export interface Tile {
     <div>
       @for(med of $meds(); track med._id){
       <ul>
-        <li> <a [routerLink]="['','medications',med._id]"> {{ med.name }}</a>
-
+        <li>
+          <a [routerLink]="['', 'medications', med._id]"> {{ med.name }}</a>
         </li>
       </ul>
       }
-    </div>
-    <!-- <mat-grid-list cols="4" rowHeight="100px">
-      @for(med of $meds(); track med.name){
 
-      <mat-grid-tile
-        [colspan]="med.name"
-        [rowspan]="med.medication_class"
-      
-        >{{ med.reviews }}</mat-grid-tile
-      >
-      }
-    </mat-grid-list> -->
+
+    </div>
+
   `,
   styles: `
   nav{
@@ -90,4 +82,5 @@ export class ListComponent {
       this.$meds.set(response.data);
     });
   }
+
 }

@@ -39,5 +39,5 @@ export type Med = {
   generic_name: string;
   medication_class: string;
   availability: string;
-  image: Image;
+  image?: Image;
 };

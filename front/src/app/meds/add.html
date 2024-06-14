@@ -43,6 +43,8 @@
       </div>
     </form>
   </mat-step>
+
+
     <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>availability</ng-template>
@@ -50,11 +52,16 @@
         <mat-label>OTC/RX</mat-label>
         <input matInput placeholder="otc/rx" formControlName="availability" required>
       </mat-form-field>
+
+     
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
-  </mat-step>
+  </mat-step> 
+
+
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>

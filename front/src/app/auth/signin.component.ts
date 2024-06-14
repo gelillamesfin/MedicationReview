@@ -82,6 +82,7 @@ export class SigninComponent {
   });
 
   onSubmit() {
+    console.log(this.form.value,'.....')
     this.#auth.signin(this.form.value as User).subscribe((response) => {
       if (response.success) {
         const decoded_token = jwtDecode(response.data) as IState;

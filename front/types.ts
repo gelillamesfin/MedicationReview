@@ -14,26 +14,6 @@ export type Medication = {
   reviews: Review[];
 };
 
-// POST /users/signin
-// export type request_body = { "email": string, "password": string }
-// export type response_body = { "success": boolean, "data": string } // JWT token
-  
-// // POST /users/signup
-//export type request_body = { "fullname": string, "email": string, "password": string }
-//response_body = { "success": boolean, "data": User } // JWT token
-
-// // POST /medications
-// request_body = { "name": string, "generic_name": string, "medication_class": string, "availability": string }
-// request_multipart = "medication_image"
-// response_body = { "success": boolean, "data": Medication }
-
-// // GET /medications?first_letter=A
-// response_body = { "success": boolean, "data": Medication[] } // only name
-
-// // PUT /medications/:medication_id
-// request_body = { "name": string, "generic_name": string, "medication_class": string, "availability": string }
-// request_multipart = "medication_image"
-// response_body = { "success": boolean, "data": boolean }
 
 // // GET /medications/:medication_id
 // response_body = { "success": boolean, "data": Medication } // without reviews

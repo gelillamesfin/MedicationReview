@@ -14,14 +14,32 @@ export const initalMedState: Medication = {
   image: { filename: '', originalname: '' },
   added_by: { user_id: '', fullname: '', email: '' },
   reviews: [],
+
 };
 
 @Injectable({
   providedIn: 'root',
 })
 export class MedService {
-  meds$ = signal(initalMedState);
+  $meds = signal<Medication[]>([initalMedState]);
+  $allMeds=signal<Medication[]>([])
   readonly #http = inject(HttpClient);
+
+
+// getAll$(){
+//   console.log('inside get all...')
+// const alphabets=['b','c','d']
+// for(let letter of alphabets){
+// const all= (this.getMeds$(letter)).subscribe(response=>{
+//   if(response.success){
+
+//     this.$allMeds.set(response.data)
+//   }
+// console.log('data from all meds',all)
+// })
+// }
+// }
+
 
   getMeds$(first_letter: string = 'A') {
     return this.#http.get<{ success: boolean; data: Medication[] }>(
@@ -37,15 +55,20 @@ export class MedService {
     );
   }
 
-  getMedById(medication_id: string) {
+  getMedById(_id: string) {
     return this.#http.get<{ success: boolean; data: Medication }>(
-      environment['BACKEND-SERVER_URL'] + `/medications/${medication_id}`
+      environment['BACKEND-SERVER_URL'] + `/medications/${_id}`
     );
   }
   updateMedById(Med:newMed,_id:string) {
-    return this.#http.post<{ success: boolean; data: Medication }>(
+   return  this.#http.put<{ success: boolean; data: Medication }>(
       environment['BACKEND-SERVER_URL'] + `/medications/${_id}`,Med
     );
+    
+  }
+
+  deleteMedById(_id:string){
+return this.#http.delete<{success:boolean;data:boolean}>(environment['BACKEND-SERVER_URL']+`/medications/${_id}`)
   }
   constructor() {}
 }

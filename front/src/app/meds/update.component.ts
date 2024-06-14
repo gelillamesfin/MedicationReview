@@ -46,7 +46,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
         <p></p>
 
         
-        <button mat-button color="primary" (click)="onSubmit()">Save</button> 
+        <button mat-button color="primary" type="submit">Save</button> 
         <button mat-button color="accent" (click)="onBack()">Back</button>   
       
       </form>
@@ -86,17 +86,7 @@ export class UpdateComponent {
     generic_name: ['', Validators.required],
     availability: ['Prescription', Validators.required],
   });
-  // med: Medication = {
-  //   _id: '',
-  //   name: '',
-  //   first_letter: '',
-  //   generic_name: '',
-  //   medication_class: '',
-  //   availability: '',
-  //   image: { filename: '', originalname: '' },
-  //   added_by: { user_id: '', fullname: '', email: '' },
-  //   reviews: [],
-  // };
+
   constructor() {
     effect(() => {
       if (this._id())
@@ -107,6 +97,7 @@ export class UpdateComponent {
   }
 
   onSubmit() {
+
     this.#medService
       .updateMedById(this.form.value as Med, this._id())
       .subscribe((response) => {
