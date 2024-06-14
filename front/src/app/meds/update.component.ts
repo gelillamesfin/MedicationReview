@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
- 
 
 @Component({
   selector: 'app-update',
@@ -45,13 +44,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
         /><br />
         <p></p>
 
-        
         <button mat-button color="primary" type="submit">Save</button> 
         <button mat-button color="accent" (click)="onBack()">Back</button>   
-      
       </form>
-
-      
 
       <!-- </mat-card-content>
       </mat-card> -->
@@ -75,12 +70,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class UpdateComponent {
   readonly #medService = inject(MedService);
-  // readonly auth = inject(AuthService);
-  _id = input<string>('');
+_id = input<string>('');
   #notification = inject(ToastrService);
   router = inject(Router);
   form = inject(FormBuilder).group({
-    // medication_id: ['',Validators.required],
     name: ['', Validators.required],
     medication_class: ['', Validators.required],
     generic_name: ['', Validators.required],
@@ -97,21 +90,22 @@ export class UpdateComponent {
   }
 
   onSubmit() {
-
-    this.#medService
-      .updateMedById(this.form.value as Med, this._id())
-      .subscribe((response) => {
-        if (response.success) {
-          this.#notification.success(`updated Successfully`);
-          this.router.navigate(['', 'medications', 'list']);
-        } else {
-          this.#notification.error(`Failed updating`);
-        }
-      });
+    const confirmation = confirm('save changes?');
+    if (confirmation && this._id()) {
+      this.#medService
+        .updateMedById(this.form.value as Med, this._id())
+        .subscribe((response) => {
+          if (response.success) {
+            this.#notification.success(`updated Successfully`);
+            this.router.navigate(['', 'medications', 'list']);
+          } else {
+            this.#notification.error(`Failed updating`);
+          }
+        });
+    }
   }
   onBack() {
-    this.router.navigate(['','medications','list'])
-    this.#notification.warning(`no updates made `)
-  
+    this.router.navigate(['', 'medications', 'list']);
+    this.#notification.warning(`no updates made `);
   }
 }

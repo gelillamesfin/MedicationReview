@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MyErrorStateMatcher } from './signupError';
 import { NgStyle } from '@angular/common';
 import { Router } from '@angular/router';
-import { User } from '../../../types';
+import { User } from '../meds/medTypes';
 //  import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 @Component({

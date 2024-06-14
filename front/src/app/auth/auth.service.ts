@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, effect, inject, signal } from '@angular/core';
-import { User } from '../../../types';
+import { User } from '../meds/medTypes';
 import { environment } from '../../environments/environment.development';
 
 export interface IState {

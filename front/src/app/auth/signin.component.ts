@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService, IState } from './auth.service';
-import { User } from '../../../types';
+import { User } from '../meds/medTypes';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgStyle } from '@angular/common';
@@ -82,7 +82,7 @@ export class SigninComponent {
   });
 
   onSubmit() {
-    console.log(this.form.value,'.....')
+    console.log(this.form.value, '.....');
     this.#auth.signin(this.form.value as User).subscribe((response) => {
       if (response.success) {
         const decoded_token = jwtDecode(response.data) as IState;

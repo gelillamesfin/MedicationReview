@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReviewService } from './review.service';
-import { Review } from '../../../types';
+import {Review } from '../meds/medTypes';
 @Component({
   selector: 'app-review',
   standalone: true,
@@ -78,10 +78,10 @@ export class AddReviewComponent {
   #notification = inject(ToastrService);
   #router = inject(Router);
 readonly #reviewService=inject(ReviewService)
-  _id=input()
+  _id=input<string>('')//medicaiton id ,
   form = inject(FormBuilder).nonNullable.group({
     review: ['', Validators.required],
-    rating: ['', Validators.required],
+    rating: [0, Validators.required],
   });
   protected readonly value = signal('');
 
@@ -91,9 +91,14 @@ readonly #reviewService=inject(ReviewService)
   }
   onAdd() {
     console.log(this.form.value, 'inside');
-    // this.#reviewService.addReview(this.form.value as Review,this._id()).subscribe(response=>{
 
-    // })
+    this.#reviewService.addReview(this.form.value as Review,this._id()).subscribe(response=>{
+      console.log(response.success,'iiiiii')
+if(response.success){
+  this.#notification.success(`Review Added`)
+}
+this.#router.navigate(['','medications','list'])
+    })
     
   }
 

@@ -4,8 +4,9 @@ export type User = {
   email: string;
   password: string;
 };
-export type Image = { filename: string; originalname: string };
+export type Image = { filename: string; originalname: string;_id?:string };
 export type Review = {
+  _id?:string
   review: string;
   rating: number;
   by: { user_id: string; fullname: string };
@@ -19,7 +20,7 @@ export type Medication = {
   generic_name: string;
   medication_class: string;
   availability: string;
-  image: Image;
+  image?: Image;
   added_by: Owner;
   reviews: Review[];
 };
@@ -39,5 +40,13 @@ export type Med = {
   generic_name: string;
   medication_class: string;
   availability: string;
+  reviews: Review[];
   image?: Image;
+};
+
+
+
+export type NewReview = {
+  review: string;
+  rating: number;
 };

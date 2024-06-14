@@ -25,8 +25,8 @@ import { MatIconModule } from '@angular/material/icon';
           </a>
         </li>
         <li><a [routerLink]="['', 'medications', 'add']">Add New Med</a></li>
-        <li><a [routerLink]="['', 'medications', 'reviews','list']">Reviews</a></li>
-        <li><a [routerLink]="['', 'medications', 'reviews','add']">Add New Review</a></li>
+        <!-- <li><a [routerLink]="['', 'medications', '_id','list']">Reviews</a></li> -->
+        <!-- <li><a [routerLink]="['', 'medications', 'reviews','add']">Add New Review</a></li> -->
 
         <li><a [routerLink]="['', 'profile']">Profile</a></li>
 

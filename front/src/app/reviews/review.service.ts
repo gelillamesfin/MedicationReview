@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { Review } from '../../../types';
+import { Review } from '../meds/medTypes';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
@@ -14,18 +14,19 @@ $reviews=signal<Review[]>([])
   constructor() { }
 
 
-getReviews$(_id:string){
-  return this.#http.get<{success:boolean,data:Review[]}>(environment['BACKEND-SERVER_URL']+`medications/${_id}/reviews`)
+getMedReviewsbyId$(_id:string){
+  return this.#http.get<{success:boolean,data:Review[]}>(environment['BACKEND-SERVER_URL']+`/medications/${_id}/reviews`)
 }
-addReview(_id:string,review:Review){
-return this.#http.post<{success:boolean,data:boolean}>(environment['BACKEND-SERVER_URL']+`medications/${_id}/reviews`,review)
+addReview(review:Review,_id:string){
+  console.log('inthe service')
+return this.#http.post<{success:boolean,data:string}>(environment['BACKEND-SERVER_URL']+`/medications/${_id}/reviews`,review)
 }
-updateReview(_id:string,newReview:Review){
-return this.#http.put<{success:boolean,data:boolean}>(environment['BACKEND-SERVER_URL']+`medications/${_id}/reviews/${newReview._id}`,newReview)
+updateReview(newReview:Review,medication_id:string){
+return this.#http.put<{success:boolean,data:boolean}>(environment['BACKEND-SERVER_URL']+`/medications/${medication_id}/reviews/${newReview._id}`,newReview)
 }
 
 deleteReview(medication_id:string,_id:string){
-return this.#http.delete<{success:boolean,data:boolean}>(environment['BACKEND-SERVER_URL']+`medications/${medication_id}/reviews/${_id}`)
+return this.#http.delete<{success:boolean,data:boolean}>(environment['BACKEND-SERVER_URL']+`/medications/${medication_id}/reviews/${_id}`)
 }
 
 }
