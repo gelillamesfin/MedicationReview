@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Medication } from './medTypes';
+import { ReviewService } from '../reviews/review.service';
 
 @Component({
   selector: 'app-med',
@@ -25,9 +26,12 @@ import { Medication } from './medTypes';
             <mat-card-title>{{ med.name }}</mat-card-title>
             <mat-card-subtitle>{{ med.generic_name }}</mat-card-subtitle
             ><br />
-            <img mat-card-sm-image src="http://localhost:3000/medications/images/{{med.image?._id}}" />
-
-            
+            <img
+              mat-card-sm-image
+              src="http://localhost:3000/medications/images/{{
+                med.image?._id
+              }}"
+            />
           </mat-card-title-group>
         </mat-card-header>
         <div class="contentContainer">
@@ -71,14 +75,14 @@ import { Medication } from './medTypes';
                 <p>Date: {{ review.date | date }}</p>
               </mat-card-content>
               <mat-card-actions>
-                @if(auth.is_logged_in()&& (review.by.fullname==
-                auth.state$().fullname)){
+                @if(auth.is_logged_in()&&
+                (review.by.fullname==auth.state$().fullname)){
                 <button (click)="onEditReview(review._id)">Edit</button>&nbsp;
-                <button (click)="onEditReview(review._id)">Delete</button>
+                <button (click)="onDeleteReview(med._id,review._id)">Delete</button>
 
                 }@if(auth.is_logged_in()&&
                 (review.by.fullname!==auth.state$().fullname)){
-                <button>Helpful</button> &nbsp; <button>Like</button>&nbsp; }
+                <button>Helpful</button> &nbsp; <button>Report</button>&nbsp; }
               </mat-card-actions>
             </div>
 
@@ -112,6 +116,7 @@ import { Medication } from './medTypes';
 export class MedComponent {
   readonly #medService = inject(MedService);
   readonly auth = inject(AuthService);
+  readonly #reviewService=inject(ReviewService)
   _id = input<string>('');
   router = inject(Router);
   med: Medication = {
@@ -137,11 +142,11 @@ export class MedComponent {
     effect(() => {
       if (this._id() !== '') {
         this.#medService.getMedById(this._id()).subscribe((response) => {
-          console.log(response.data.image);
           this.med = response.data;
         });
       }
     });
+    
   }
   onEdit(_id: any) {
     if (_id) {
@@ -166,6 +171,20 @@ export class MedComponent {
       });
     }
   }
+  onDeleteReview(medication_id:any,_id: any) {
+const confirmation=confirm('delete review?')
+if(_id && confirmation){
+  this.#reviewService.deleteReview(medication_id,_id).subscribe(response=>{
+    if(response.success){
+      this.#notification.success(`Review deleted`)
+      this.#reviewService.$reviews.update(oldReview=>oldReview.filter((review)=>review._id!==_id))
+          this.router.navigate(['', 'medications', 'list']);
+
+      
+    }
+  })
+}
+  }
   onReview(_id: any) {
     if (_id) {
       this.router.navigate(['', 'medications', 'reviews', 'add', _id]);
@@ -173,6 +192,16 @@ export class MedComponent {
   }
   onEditReview(_id: any) {
     //because Id is optional
-    this.router.navigate(['', 'medications', 'reviews', 'update', _id]);
+    this.router.navigate([
+      '',
+      'medications',
+      'reviews',
+      'update',
+      this.med._id,
+      _id,
+    ]);
+  }
+  ngDoCheck(){
+    this.onDeleteReview
   }
 }

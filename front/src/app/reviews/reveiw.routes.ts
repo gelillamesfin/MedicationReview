@@ -12,6 +12,6 @@ export const meds_routes: Routes = [
       import('./addreview.component').then((c) => c.AddReviewComponent),
   },
   {
-    path:'update/:_id',loadComponent:()=>import('./update-review.component').then(c=>c.UpdateReviewComponent)
+    path:'update/:medication_id/:_id',loadComponent:()=>import('./update-review.component').then(c=>c.UpdateReviewComponent)
   }
 ];

@@ -58,6 +58,7 @@ import { Review } from '../meds/medTypes';
 })
 export class UpdateReviewComponent {
   _id = input<string>('');
+  medication_id=input<string>('')
   #notification = inject(ToastrService);
   #router = inject(Router);
   readonly #reviewService = inject(ReviewService);
@@ -74,25 +75,27 @@ export class UpdateReviewComponent {
   }
 
   constructor() {//need the medication id as well!
-    // effect(() => {
-    //   if (this._id())
-    //     this.#reviewService.getMedReviewsbyId$(this._id()).subscribe((response) => {
-    //       this.form.patchValue(response.data);
-    //     });
-    // });
+    effect(() => {
+      if (this._id())
+        this.#reviewService.getReviewById(this.medication_id(),this._id()).subscribe((response) => {
+          this.form.patchValue(response.data);
+        });
+    });
   }
 
 
 
 
 
-  
+
   onSave() {
     const confirmation = confirm('save changes?');
+    console.log(this._id(),'iiidddd')
     if (confirmation && this._id()) {
       this.#reviewService
-        .updateReview(this.form.value as Review, this._id())
+        .updateReview(this.form.value as Review, this.medication_id(),this._id())
         .subscribe((response) => {
+          console.log('fron on save',response.success)
           if (response.success) {
             this.#notification.success(`Review updated`);
             this.#router.navigate(['', 'medications', 'list']);
