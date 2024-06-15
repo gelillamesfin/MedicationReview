@@ -1,8 +1,9 @@
 
 
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
+</button> -->
+<h1>  Add FDA Aprovide Drugs Only  </h1>
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
@@ -63,9 +64,10 @@
 
     <mat-step [stepControl]="firstFormGroup" >
     <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Image</ng-template>
 
         <input type="file" formControlName="image" (change)="setFile($event)" />
-      <button type="submit" (click)="onUpload()">upload</button>
+      <!-- <button type="submit" (click)="onUpload()">upload</button> -->
 
       <div>
         <button mat-button matStepperNext>Next</button>

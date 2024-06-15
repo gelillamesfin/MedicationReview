@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReviewService } from './review.service';
 import { Review } from '../meds/medTypes';
+import { NgStyle } from '@angular/common';
 @Component({
   selector: 'app-update-review',
   standalone: true,
@@ -15,9 +16,10 @@ import { Review } from '../meds/medTypes';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
+    NgStyle,
   ],
   template: `
-    <p class="container">Updating your Review for {{ _id() }}</p>
+    <h3 class="container" [ngStyle]="{ color: 'red' }">Updating Your Review</h3>
 
     <br />
     <div class="container">
@@ -54,11 +56,20 @@ import { Review } from '../meds/medTypes';
       <button (click)="onSave()" [disabled]="form.invalid">Add</button>&nbsp;
     </div>
   `,
-  styles: ``,
+  styles: `
+  .container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+ margin-top:20px
+  }
+  
+  
+  `,
 })
 export class UpdateReviewComponent {
   _id = input<string>('');
-  medication_id=input<string>('')
+  medication_id = input<string>('');
   #notification = inject(ToastrService);
   #router = inject(Router);
   readonly #reviewService = inject(ReviewService);
@@ -74,28 +85,30 @@ export class UpdateReviewComponent {
     console.log(this.form.value, 'inside....');
   }
 
-  constructor() {//need the medication id as well!
+  constructor() {
+    //need the medication id as well!
     effect(() => {
       if (this._id())
-        this.#reviewService.getReviewById(this.medication_id(),this._id()).subscribe((response) => {
-          this.form.patchValue(response.data);
-        });
+        this.#reviewService
+          .getReviewById(this.medication_id(), this._id())
+          .subscribe((response) => {
+            this.form.patchValue(response.data);
+          });
     });
   }
 
-
-
-
-
-
   onSave() {
     const confirmation = confirm('save changes?');
-    console.log(this._id(),'iiidddd')
+    console.log(this._id(), 'iiidddd');
     if (confirmation && this._id()) {
       this.#reviewService
-        .updateReview(this.form.value as Review, this.medication_id(),this._id())
+        .updateReview(
+          this.form.value as Review,
+          this.medication_id(),
+          this._id()
+        )
         .subscribe((response) => {
-          console.log('fron on save',response.success)
+          console.log('fron on save', response.success);
           if (response.success) {
             this.#notification.success(`Review updated`);
             this.#router.navigate(['', 'medications', 'list']);

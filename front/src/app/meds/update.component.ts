@@ -42,14 +42,17 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
           placeholder="generic_name"
           formControlName="generic_name"
         /><br />
-        <p></p>
-
-        <button mat-button color="primary" type="submit">Save</button> 
-        <button mat-button color="accent" (click)="onBack()">Back</button>   
-      </form>
-
-      <!-- </mat-card-content>
-      </mat-card> -->
+      
+        <input
+        type="file"
+        formControlName="image"
+        (change)="setFile($event)"
+        />
+      <p></p>
+    
+    <button mat-button color="primary" type="submit">Save</button>
+  <button mat-button color="accent" (click)="onBack()">Back</button>
+  </form>
     </div>
   `,
   styles: `
@@ -69,8 +72,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   `,
 })
 export class UpdateComponent {
+  file!: File;
   readonly #medService = inject(MedService);
-_id = input<string>('');
+  _id = input<string>('');
   #notification = inject(ToastrService);
   router = inject(Router);
   form = inject(FormBuilder).group({
@@ -78,7 +82,12 @@ _id = input<string>('');
     medication_class: ['', Validators.required],
     generic_name: ['', Validators.required],
     availability: ['Prescription', Validators.required],
+    //  image: '',
   });
+
+  setFile(event: Event) {
+    this.file = (event.target as HTMLInputElement).files![0]; //get the first file from the obj
+  }
 
   constructor() {
     effect(() => {
@@ -90,10 +99,17 @@ _id = input<string>('');
   }
 
   onSubmit() {
+     const formData = new FormData();
+     formData.append('name', this.form.value.name!);
+     formData.append('generic_name', this.form.value.generic_name!);
+     formData.append('availability', this.form.value.availability!);
+     formData.append('medication_class', this.form.value.medication_class!);
+     formData.append('medication_image', this.file);
+
     const confirmation = confirm('save changes?');
     if (confirmation && this._id()) {
       this.#medService
-        .updateMedById(this.form.value as Med, this._id())
+        .updateMedById(formData, this._id())
         .subscribe((response) => {
           if (response.success) {
             this.#notification.success(`updated Successfully`);

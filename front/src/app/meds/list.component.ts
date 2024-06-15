@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Medication } from './medTypes';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { NgStyle } from '@angular/common';
 
 export interface Tile {
   color: string;
@@ -14,54 +15,64 @@ export interface Tile {
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [MatGridListModule, RouterLink],
+  imports: [MatGridListModule, RouterLink,NgStyle],
   template: `
     <nav>
-      <button (click)="getMedsForLetter('A')">A</button>
-      <button (click)="getMedsForLetter('B')">B</button>
-      <button (click)="getMedsForLetter('C')">C</button>
-      <button (click)="getMedsForLetter('D')">D</button>
-      <button (click)="getMedsForLetter('E')">E</button>
-      <button (click)="getMedsForLetter('F')">F</button>
-      <button (click)="getMedsForLetter('G')">G</button>
-      <button (click)="getMedsForLetter('H')">H</button>
-      <button (click)="getMedsForLetter('I')">I</button>
-      <button (click)="getMedsForLetter('J')">J</button>
-      <button (click)="getMedsForLetter('K')">K</button>
-      <button (click)="getMedsForLetter('L')">L</button>
-      <button (click)="getMedsForLetter('M')">M</button>
-      <button (click)="getMedsForLetter('N')">N</button>
-      <button (click)="getMedsForLetter('O')">O</button>
-      <button (click)="getMedsForLetter('P')">P</button>
-      <button (click)="getMedsForLetter('Q')">Q</button>
-      <button (click)="getMedsForLetter('R')">R</button>
-      <button (click)="getMedsForLetter('S')">S</button>
-      <button (click)="getMedsForLetter('T')">T</button>
-      <button (click)="getMedsForLetter('U')">U</button>
-      <button (click)="getMedsForLetter('V')">V</button>
-      <button (click)="getMedsForLetter('W')">W</button>
-      <button (click)="getMedsForLetter('X')">X</button>
-      <button (click)="getMedsForLetter('Z')">Z</button>
+      <button (click)="getMedsForLetter('A')">A</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('B')">B</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('C')">C</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('D')">D</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('E')">E</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('F')">F</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('G')">G</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('H')">H</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('I')">I</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('J')">J</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('K')">K</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('L')">L</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('M')">M</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('N')">N</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('O')">O</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('P')">P</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('Q')">Q</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('R')">R</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('S')">S</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('T')">T</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('U')">U</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('V')">V</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('W')">W</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('X')">X</button>&nbsp;&nbsp;
+      <button (click)="getMedsForLetter('Z')">Z</button>&nbsp;&nbsp;
 
       <!-- fix route   -->
     </nav>
     <div>
+      <h2 [ngStyle]="{'margin-left':'30px'}">Most Common Drugs</h2>
       @for(med of $meds(); track med._id){
-      <ul>
-        <li>
-          <a [routerLink]="['', 'medications', med._id]"> {{ med.name }}</a>
-        </li>
-      </ul>
+      <div class="meds">
+        <a [routerLink]="['', 'medications', med._id]"> {{ med.name }}</a>
+      </div>
       }
-  
     </div>
   `,
   styles: `
+
+  .meds{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    // justify-content:center;
+    margin-top:2px;
+    margin-left:30px
+    
+  }
   nav{
     display:flex;
     flex-wrap:wrap;
     align-items:center;
-    justify-content:space-around;
+    justify-content:center;
+    margin-top:20px
+    
     },
 
   
@@ -86,7 +97,6 @@ export class ListComponent {
   // getAll$() {
   //   console.log('inside get all...');
   //   const alphabets = 'abcdefghigklmnopqrstuvwxyz'.split('');
- 
 
   //   for (let letter of alphabets) {
   //     this.medService.getMeds$(letter).subscribe((response) => {
@@ -101,8 +111,8 @@ export class ListComponent {
   //       });
   //     }
   // }
-// ngOnInit(){
-// this.getAll$()
+  // ngOnInit(){
+  // this.getAll$()
 
-// }
+  // }
 }

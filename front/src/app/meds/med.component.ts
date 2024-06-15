@@ -18,9 +18,7 @@ import { ReviewService } from '../reviews/review.service';
     <div class="card-container">
       <mat-card class="example-card">
         <mat-card-header>
-          <!-- <button mat-icon-button class="dots">
-            <mat-icon>more_vert</mat-icon>
-          </button> -->
+        
 
           <mat-card-title-group>
             <mat-card-title>{{ med.name }}</mat-card-title>
@@ -76,12 +74,12 @@ import { ReviewService } from '../reviews/review.service';
               </mat-card-content>
               <mat-card-actions>
                 @if(auth.is_logged_in()&&
-                (review.by.fullname==auth.state$().fullname)){
+                (review.by.user_id==auth.state$()._id)){
                 <button (click)="onEditReview(review._id)">Edit</button>&nbsp;
                 <button (click)="onDeleteReview(med._id,review._id)">Delete</button>
 
                 }@if(auth.is_logged_in()&&
-                (review.by.fullname!==auth.state$().fullname)){
+                (review.by.user_id!==auth.state$()._id)){
                 <button>Helpful</button> &nbsp; <button>Report</button>&nbsp; }
               </mat-card-actions>
             </div>
@@ -191,7 +189,7 @@ if(_id && confirmation){
     }
   }
   onEditReview(_id: any) {
-    //because Id is optional
+   
     this.router.navigate([
       '',
       'medications',

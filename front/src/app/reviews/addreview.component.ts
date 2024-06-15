@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReviewService } from './review.service';
 import {Review } from '../meds/medTypes';
+import { NgStyle } from '@angular/common';
 @Component({
   selector: 'app-review',
   standalone: true,
@@ -21,9 +22,10 @@ import {Review } from '../meds/medTypes';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
+    NgStyle
   ],
   template: `
-    <p class="container">Your Feedback is Valuable to us {{_id()}}</p>
+    <h3 class="container" [ngStyle]="{ color: 'green' }"> Your Review is Valuable!</h3>
 
     <br />
     <div class="container">
@@ -77,8 +79,8 @@ import {Review } from '../meds/medTypes';
 export class AddReviewComponent {
   #notification = inject(ToastrService);
   #router = inject(Router);
-readonly #reviewService=inject(ReviewService)
-  _id=input<string>('')//medicaiton id ,
+  readonly #reviewService = inject(ReviewService);
+  _id = input<string>(''); //medicaiton id ,
   form = inject(FormBuilder).nonNullable.group({
     review: ['', Validators.required],
     rating: [0, Validators.required],
@@ -92,18 +94,18 @@ readonly #reviewService=inject(ReviewService)
   onAdd() {
     console.log(this.form.value, 'inside');
 
-    this.#reviewService.addReview(this.form.value as Review,this._id()).subscribe(response=>{
-      console.log(response.success,'iiiiii')
-if(response.success){
-  this.#notification.success(`Review Added`)
-}
-this.#router.navigate(['','medications','list'])
-    })
-    
+    this.#reviewService
+      .addReview(this.form.value as Review, this._id())
+      .subscribe((response) => {
+        console.log(response.success, 'iiiiii');
+        if (response.success) {
+          this.#notification.success(`Review Added`);
+        }
+        this.#router.navigate(['', 'medications', 'list']);
+      });
   }
 
   onBack() {
-
-     this.#router.navigate(['', 'medications', 'list']);
+    this.#router.navigate(['', 'medications', 'list']);
   }
 }

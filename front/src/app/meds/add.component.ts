@@ -39,15 +39,13 @@ export class AddComponent {
   isLinear = false;
 
 setFile(event:Event){
-  console.log(event);
+   
   
   this.file=(event.target as HTMLInputElement).files![0]//get the first file from the obj
-  console.log(this.file,'this.file from setFile')
+ 
 }
 
-onUpload(){
-  console.log(this.file,'im file ')
-}
+ 
   onAdd() {
  const formData=new FormData ();
  formData.append('name', this.firstFormGroup.value.name!);

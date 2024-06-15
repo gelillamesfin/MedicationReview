@@ -4,6 +4,8 @@ import { AuthService, initalState } from './auth/auth.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { NgClass, NgStyle } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,23 +15,33 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
+    NgStyle,
+    NgClass,
   ],
   template: `
-    <h1>Welcome {{ auth.state$().fullname }}!</h1>
+    <div class="header">
+      <h1>Welcome {{ auth.state$().fullname }}!</h1>&nbsp;
+      <h3>search  </h3>&nbsp; 
+      <h6>A-Z</h6>
+    </div>
+    <!-- <p [ngStyle]="{ color: 'red' }">Find Drugs & Reviews</p> -->
+    <!-- <img src='./imgs/A-z.png' width='100px'> -->
+
     @if(auth.is_logged_in()){
-    <nav>
-      <ul>
+    <nav class="navbar">
+      <ul class="navbar-left">
         <li>
           <a [routerLink]="['', 'medications', 'list']">
-            <mat-icon aria-hidden="false"aria-label="Example home icon"fontIcon="home"></mat-icon>
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="home"
+            ></mat-icon>
           </a>
         </li>
+      </ul>
+      <ul class="navbar-right">
         <li><a [routerLink]="['', 'medications', 'add']">Add New Med</a></li>
-        <!-- <li><a [routerLink]="['', 'medications', '_id','list']">Reviews</a></li> -->
-        <!-- <li><a [routerLink]="['', 'medications', 'reviews','add']">Add New Review</a></li> -->
-
-        <li><a [routerLink]="['', 'profile']">Profile</a></li>
-
         <li><a (click)="logout()">Logout </a></li>
       </ul>
     </nav>
@@ -47,9 +59,51 @@ import { MatIconModule } from '@angular/material/icon';
   `,
   styles: [
     `
-      nav > ul > li {
-        display: inline;
-        padding-right: 20px;
+      // nav > ul > li {
+      //   display: inline;
+      //   padding-right: 20px;
+      // }
+
+      .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        // box-sizing: border-box;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        background-color: #333;
+        padding: 10px 20px;
+      }
+      .navbar-left,
+      .navbar-right {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-left li,
+      .navbar-right li {
+        margin-right: 10px;
+      }
+
+      .navbar-left li a,
+      .navbar-right li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar-left li a:hover,
+      .navbar-right li a:hover {
+        background-color: #555;
       }
     `,
   ],

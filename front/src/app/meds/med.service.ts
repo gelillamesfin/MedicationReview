@@ -23,7 +23,7 @@ export const initalMedState: Medication = {
 })
 export class MedService {
   $meds = signal<Medication[]>([initalMedState]);
-  allMeds$= signal<any>([initalMedState]);
+  // allMeds$= signal<any>([initalMedState]);
   readonly #http = inject(HttpClient);
 
 
@@ -48,7 +48,7 @@ export class MedService {
       environment['BACKEND-SERVER_URL'] + `/medications/${_id}`
     );
   }
-  updateMedById(Med: newMed, _id: string) {
+  updateMedById(Med:FormData, _id: string) {
     return this.#http.put<{ success: boolean; data: Medication }>(
       environment['BACKEND-SERVER_URL'] + `/medications/${_id}`,
       Med
