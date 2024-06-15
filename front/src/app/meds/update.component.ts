@@ -1,12 +1,8 @@
-import { Component, effect, inject, input } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import {Component,effect,inject,input,} from '@angular/core';
 import { MedService } from './med.service';
-import { Med, Medication, newMed } from './medTypes';
-
 import { MatCardModule } from '@angular/material/card';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,8 +10,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-update',
   standalone: true,
-
-  imports: [
+imports: [
     MatCardModule,
     NgStyle,
     MatIconModule,
@@ -42,17 +37,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
           placeholder="generic_name"
           formControlName="generic_name"
         /><br />
-      
-        <input
-        type="file"
-        formControlName="image"
-        (change)="setFile($event)"
-        />
-      <p></p>
-    
-    <button mat-button color="primary" type="submit">Save</button>
-  <button mat-button color="accent" (click)="onBack()">Back</button>
-  </form>
+
+        <input type="file" formControlName="image" (change)="setFile($event)" />
+        <p></p>
+
+        <button mat-button color="primary" type="submit">Save</button>
+        <button mat-button color="accent" (click)="onBack()">Back</button>
+      </form>
     </div>
   `,
   styles: `
@@ -75,14 +66,15 @@ export class UpdateComponent {
   file!: File;
   readonly #medService = inject(MedService);
   _id = input<string>('');
+
   #notification = inject(ToastrService);
   router = inject(Router);
-  form = inject(FormBuilder).group({
+  form = inject(FormBuilder).nonNullable.group({
     name: ['', Validators.required],
     medication_class: ['', Validators.required],
     generic_name: ['', Validators.required],
     availability: ['Prescription', Validators.required],
-    //  image: '',
+ image: '',
   });
 
   setFile(event: Event) {
@@ -93,18 +85,25 @@ export class UpdateComponent {
     effect(() => {
       if (this._id())
         this.#medService.getMedById(this._id()).subscribe((response) => {
-          this.form.patchValue(response.data);
+          this.form.controls.name.patchValue(response.data.name);
+          this.form.controls.medication_class.patchValue(response.data.medication_class);
+          this.form.controls.generic_name.patchValue(response.data.generic_name);
+          this.form.controls.availability.patchValue(response.data.availability);
+          // this.form.controls.image.patchValue(response.data.image?.originalname as string);
+
+
+
         });
     });
   }
 
   onSubmit() {
-     const formData = new FormData();
-     formData.append('name', this.form.value.name!);
-     formData.append('generic_name', this.form.value.generic_name!);
-     formData.append('availability', this.form.value.availability!);
-     formData.append('medication_class', this.form.value.medication_class!);
-     formData.append('medication_image', this.file);
+    const formData = new FormData();
+    formData.append('name', this.form.value.name!);
+    formData.append('generic_name', this.form.value.generic_name!);
+    formData.append('availability', this.form.value.availability!);
+    formData.append('medication_class', this.form.value.medication_class!);
+    formData.append('medication_image', this.file);
 
     const confirmation = confirm('save changes?');
     if (confirmation && this._id()) {
@@ -121,7 +120,8 @@ export class UpdateComponent {
     }
   }
   onBack() {
-    this.router.navigate(['', 'medications', 'list']);
+    this.router.navigate(['', 'medications', this._id()]);
+
     this.#notification.warning(`no updates made `);
   }
 }

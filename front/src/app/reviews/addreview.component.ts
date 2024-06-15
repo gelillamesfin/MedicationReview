@@ -101,11 +101,11 @@ export class AddReviewComponent {
         if (response.success) {
           this.#notification.success(`Review Added`);
         }
-        this.#router.navigate(['', 'medications', 'list']);
+        this.#router.navigate(['', 'medications', this._id()]);
       });
   }
 
   onBack() {
-    this.#router.navigate(['', 'medications', 'list']);
+    this.#router.navigate(['', 'medications',this._id()]);
   }
 }

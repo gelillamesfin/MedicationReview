@@ -26,6 +26,6 @@ export const meds_routes: Routes = [
   {
     path: 'reviews',
     loadChildren: () =>
-      import('../reviews/reveiw.routes').then((r) => r.meds_routes),
+      import('../reviews/reveiw.routes').then((r) => r.reviews_routes),
   },
 ];

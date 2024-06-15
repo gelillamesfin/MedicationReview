@@ -1,6 +1,5 @@
-import { Component, Pipe, effect, inject, input } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { MedService } from './med.service';
-
 import { MatCardModule } from '@angular/material/card';
 import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,16 +17,14 @@ import { ReviewService } from '../reviews/review.service';
     <div class="card-container">
       <mat-card class="example-card">
         <mat-card-header>
-        
-
           <mat-card-title-group>
-            <mat-card-title>{{ med.name }}</mat-card-title>
-            <mat-card-subtitle>{{ med.generic_name }}</mat-card-subtitle
+            <mat-card-title>{{ med().name }}</mat-card-title>
+            <mat-card-subtitle>{{ med().generic_name }}</mat-card-subtitle
             ><br />
             <img
               mat-card-sm-image
               src="http://localhost:3000/medications/images/{{
-                med.image?._id
+                med().image?._id
               }}"
             />
           </mat-card-title-group>
@@ -35,34 +32,35 @@ import { ReviewService } from '../reviews/review.service';
         <div class="contentContainer">
           <mat-card-content>
             <span [ngStyle]="{ 'font-weight': 'bold' }"> Availability: </span
-            >{{ med.availability }}<br />
+            >{{ med().availability }}<br />
             <span [ngStyle]="{ 'font-weight': 'bold' }"
               >Medication Class:
             </span>
-            {{ med.medication_class }}
+            {{ med().medication_class }}
 
             <p></p>
 
-            @if(auth.is_logged_in()&&(auth.state$().fullname===med.added_by.fullname)){
-            <button mat-button color="accent" (click)="onEdit(med._id)">
+            @if(auth.is_logged_in()&&(auth.state$()._id===
+            med().added_by.user_id)){
+            <button mat-button color="accent" (click)="onEdit(med()._id)">
               Edit</button
             >&nbsp;
 
-            <button mat-button color="warn" (click)="onDelete(med._id)">
+            <button mat-button color="warn" (click)="onDelete(med()._id)">
               Delete
             </button>
 
             }
-            @if(auth.is_logged_in()&&(auth.state$().fullname!==med.added_by.fullname)){
+            @if(auth.is_logged_in()&&(auth.state$()._id!==med().added_by.user_id)){
 
-            <button mat-button color="primary" (click)="onReview(med._id)">
+            <button mat-button color="primary" (click)="onReview(med()._id)">
               Review
             </button>
 
             }
             <p>Reviews</p>
 
-            @for(review of med.reviews; track review){
+            @for(review of med().reviews; track review){
             <div clss="review">
               <mat-card-header>
                 <mat-card-title>{{ review.by.fullname }}</mat-card-title>
@@ -76,7 +74,9 @@ import { ReviewService } from '../reviews/review.service';
                 @if(auth.is_logged_in()&&
                 (review.by.user_id==auth.state$()._id)){
                 <button (click)="onEditReview(review._id)">Edit</button>&nbsp;
-                <button (click)="onDeleteReview(med._id,review._id)">Delete</button>
+                <button (click)="onDeleteReview(med()._id, review._id)">
+                  Delete
+                </button>
 
                 }@if(auth.is_logged_in()&&
                 (review.by.user_id!==auth.state$()._id)){
@@ -114,10 +114,11 @@ import { ReviewService } from '../reviews/review.service';
 export class MedComponent {
   readonly #medService = inject(MedService);
   readonly auth = inject(AuthService);
-  readonly #reviewService=inject(ReviewService)
+  readonly #reviewService = inject(ReviewService);
+  // _id = model<string>('');
   _id = input<string>('');
   router = inject(Router);
-  med: Medication = {
+  med = signal<Medication>({
     _id: '',
     name: '',
     first_letter: '',
@@ -134,17 +135,17 @@ export class MedComponent {
         date: 0,
       },
     ],
-  };
+  });
   #notification = inject(ToastrService);
   constructor() {
     effect(() => {
       if (this._id() !== '') {
         this.#medService.getMedById(this._id()).subscribe((response) => {
-          this.med = response.data;
+          this.med.set(response.data);
+          // this.med.reviews=response.data.reviews
         });
       }
     });
-    
   }
   onEdit(_id: any) {
     if (_id) {
@@ -169,19 +170,27 @@ export class MedComponent {
       });
     }
   }
-  onDeleteReview(medication_id:any,_id: any) {
-const confirmation=confirm('delete review?')
-if(_id && confirmation){
-  this.#reviewService.deleteReview(medication_id,_id).subscribe(response=>{
-    if(response.success){
-      this.#notification.success(`Review deleted`)
-      this.#reviewService.$reviews.update(oldReview=>oldReview.filter((review)=>review._id!==_id))
-          this.router.navigate(['', 'medications', 'list']);
-
-      
+  onDeleteReview(medication_id: any, _id: any) {
+    const confirmation = confirm('delete review?');
+    if (_id && confirmation) {
+      this.#reviewService
+        .deleteReview(medication_id, _id)
+        .subscribe((response) => {
+          if (response.success) {
+            this.#notification.warning(`Review deleted`);
+            this.#reviewService.$reviews.update((oldReview) =>
+              oldReview.filter((review) => review._id !== _id)
+            );
+   if (this._id() !== '') {
+     this.#medService.getMedById(this._id()).subscribe((response) => {
+       this.med.set(response.data);
+       // this.med.reviews=response.data.reviews
+     });
+   }
+            this.router.navigate(['', 'medications', this._id()]);
+          }
+        });
     }
-  })
-}
   }
   onReview(_id: any) {
     if (_id) {
@@ -189,17 +198,16 @@ if(_id && confirmation){
     }
   }
   onEditReview(_id: any) {
-   
     this.router.navigate([
       '',
       'medications',
       'reviews',
       'update',
-      this.med._id,
+      this.med()._id,
       _id,
     ]);
   }
-  ngDoCheck(){
-    this.onDeleteReview
+  ngDoCheck() {
+    this.onDeleteReview;
   }
 }

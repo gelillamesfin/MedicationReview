@@ -20,12 +20,12 @@ import { NgClass, NgStyle } from '@angular/common';
   ],
   template: `
     <div class="header">
-      <h1>Welcome {{ auth.state$().fullname }}!</h1>&nbsp;
-      <h3>search  </h3>&nbsp; 
+      <h1>Welcome {{ auth.state$().fullname }}!</h1>
+      &nbsp;
+      <h3>search</h3>
+      &nbsp;
       <h6>A-Z</h6>
     </div>
-    <!-- <p [ngStyle]="{ color: 'red' }">Find Drugs & Reviews</p> -->
-    <!-- <img src='./imgs/A-z.png' width='100px'> -->
 
     @if(auth.is_logged_in()){
     <nav class="navbar">
@@ -46,10 +46,12 @@ import { NgClass, NgStyle } from '@angular/common';
       </ul>
     </nav>
     }@else {
-    <nav>
-      <ul>
+    <nav class="navbar">
+      <ul class="navbar-left">
         <li><a [routerLink]="['signup']">Signup</a></li>
         <li><a [routerLink]="['signin']">Signin</a></li>
+      </ul>
+      <ul class="navbar-right">
         <li><a [routerLink]="['', 'medications', 'list']">Medications</a></li>
       </ul>
     </nav>

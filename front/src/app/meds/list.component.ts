@@ -82,7 +82,7 @@ export class ListComponent {
   readonly medService = inject(MedService);
 
   $meds = signal<Medication[]>([]);
-  $allMeds = signal<Medication[]>([]);
+
   constructor() {
     this.medService.getMeds$().subscribe((response) => {
       this.$meds.set(response.data);
@@ -94,25 +94,5 @@ export class ListComponent {
     });
   }
 
-  // getAll$() {
-  //   console.log('inside get all...');
-  //   const alphabets = 'abcdefghigklmnopqrstuvwxyz'.split('');
 
-  //   for (let letter of alphabets) {
-  //     this.medService.getMeds$(letter).subscribe((response) => {
-  //       if(response.success){
-
-  //         // this.$allMeds.set(response.data)
-  //         this.$allMeds.update((old)=>{
-  //           return [...old,response.data]
-  //         })
-  //         console.log(response.data)
-  //       }
-  //       });
-  //     }
-  // }
-  // ngOnInit(){
-  // this.getAll$()
-
-  // }
 }

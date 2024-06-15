@@ -86,7 +86,7 @@ export class UpdateReviewComponent {
   }
 
   constructor() {
-    //need the medication id as well!
+  
     effect(() => {
       if (this._id())
         this.#reviewService
@@ -99,7 +99,7 @@ export class UpdateReviewComponent {
 
   onSave() {
     const confirmation = confirm('save changes?');
-    console.log(this._id(), 'iiidddd');
+    
     if (confirmation && this._id()) {
       this.#reviewService
         .updateReview(
@@ -120,7 +120,7 @@ export class UpdateReviewComponent {
   }
 
   onBack() {
-    this.#router.navigate(['', 'medications', 'list']);
+    this.#router.navigate(['', 'medications',this.medication_id()]);
     this.#notification.warning(`no updates made `);
   }
 }

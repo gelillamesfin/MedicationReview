@@ -55,19 +55,13 @@ import { Router } from '@angular/router';
   max-width: 350px;
   width: 100%;
   margin-Left:40%;
- 
-
-}
-
+ }
 .example-full-width {
   width: 100%;
-
-
 }
 
 .form{
   display:flex;
-
 }
 
   

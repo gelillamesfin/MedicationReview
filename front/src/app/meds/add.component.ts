@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, FormControl, AbstractControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -28,11 +28,11 @@ export class AddComponent {
   readonly #notification = inject(ToastrService);
   #medService = inject(MedService);
   readonly #router = inject(Router);
-  firstFormGroup = inject(FormBuilder).group({
-    name: ['', Validators.required],
-    generic_name: ['', Validators.required],
+  firstFormGroup = inject(FormBuilder).nonNullable.group({
+    name: ['', Validators.required,],
+    generic_name: ['', Validators.required,],
     medication_class: ['', Validators.required],
-    availability: ['', Validators.required],
+    availability: ['', Validators.required,],
     image:''
   });
 
@@ -48,11 +48,14 @@ setFile(event:Event){
  
   onAdd() {
  const formData=new FormData ();
- formData.append('name', this.firstFormGroup.value.name!);
- formData.append('generic_name', this.firstFormGroup.value.generic_name!);
- formData.append('availability', this.firstFormGroup.value.availability!);
- formData.append('medication_class', this.firstFormGroup.value.medication_class!);
- formData.append('medication_image', this.file);
+ if(!this.validatorAsync){
+
+   formData.append('name', this.firstFormGroup.value.name!);
+   formData.append('generic_name', this.firstFormGroup.value.generic_name!);
+   formData.append('availability', this.firstFormGroup.value.availability!);
+   formData.append('medication_class', this.firstFormGroup.value.medication_class!);
+   formData.append('medication_image', this.file);
+  }
 
     this.#medService
       .addMed(formData)
@@ -67,5 +70,11 @@ setFile(event:Event){
           this.#notification.error(`something went wrong, please try again `);
         }
       });
+  }
+
+  validatorAsync(control:AbstractControl){
+
+
+    return ('')
   }
 }
