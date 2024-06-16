@@ -55,6 +55,7 @@ export class MedService {
     );
   }
 
+  
   deleteMedById(_id: string) {
     return this.#http.delete<{ success: boolean; data: boolean }>(
       environment['BACKEND-SERVER_URL'] + `/medications/${_id}`

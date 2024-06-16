@@ -112,7 +112,7 @@ export class UpdateComponent {
         .subscribe((response) => {
           if (response.success) {
             this.#notification.success(`updated Successfully`);
-            this.router.navigate(['', 'medications', 'list']);
+            this.router.navigate(['', 'medications',this._id()]);
           } else {
             this.#notification.error(`Failed updating`);
           }

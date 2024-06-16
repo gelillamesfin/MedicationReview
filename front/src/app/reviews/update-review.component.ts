@@ -39,11 +39,11 @@ import { NgStyle } from '@angular/common';
         <mat-form-field>
           <mat-label>Rating</mat-label>
           <mat-select formControlName="rating">
-            <mat-option value="5">5</mat-option>
-            <mat-option value="4">4</mat-option>
-            <mat-option value="3">3</mat-option>
-            <mat-option value="2">2</mat-option>
-            <mat-option value="1">1</mat-option>
+            <mat-option [value]="5">5</mat-option>
+            <mat-option [value]="4">4</mat-option>
+            <mat-option [value]="3">3</mat-option>
+            <mat-option [value]="2">2</mat-option>
+            <mat-option [value]="1">1</mat-option>
           </mat-select>
           <mat-hint align="end"></mat-hint>
         </mat-form-field>
@@ -82,7 +82,7 @@ export class UpdateReviewComponent {
 
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
-    console.log(this.form.value, 'inside....');
+    
   }
 
   constructor() {
@@ -111,7 +111,7 @@ export class UpdateReviewComponent {
           console.log('fron on save', response.success);
           if (response.success) {
             this.#notification.success(`Review updated`);
-            this.#router.navigate(['', 'medications', 'list']);
+            this.#router.navigate(['', 'medications', this.medication_id()]);
           } else {
             this.#notification.error(`Failed updating review`);
           }
