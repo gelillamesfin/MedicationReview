@@ -28,11 +28,18 @@ const THUMBUP_ICON =
        <mat-card class="example-card">
          <mat-card-header>
            <mat-card-title-group>
-             <mat-card-title>{{ med().name }}</mat-card-title>
-             <mat-card-subtitle>{{ med().generic_name }}</mat-card-subtitle
+             <mat-card-title
+               [ngStyle]="{ 'font-weight': 'bold', 'font-size': '40px' }"
+               >{{ med().name }}</mat-card-title
+             >
+
+             <mat-card-subtitle [ngStyle]="{ 'margin-top': '30px' }">
+               <span [ngStyle]="{ 'font-weight': 'bold' }">Generic Name:</span>
+               {{ med().generic_name }}</mat-card-subtitle
              ><br />
+             
              <img
-               mat-card-sm-image
+               mat-card-lg-image
                src="http://localhost:3000/medications/images/{{
                  med().image?._id
                }}"
@@ -67,17 +74,30 @@ const THUMBUP_ICON =
              </button>
 
              }
-             <p>Reviews</p>
+             <p [ngStyle]="{ 'font-weight': 'bold', 'font-size': '40px' }">
+               Reviews
+             </p>
 
              @for(review of med().reviews; track review){
              <div clss="review">
                <mat-card-header>
-                 <mat-card-title>{{ review.by.fullname }}</mat-card-title>
+                 <mat-card-title [ngStyle]="{ 'font-weight': 'bold', 'font-size': '20px' }">
+                   {{ review.by.fullname }}</mat-card-title
+                 >
                </mat-card-header>
                <mat-card-content>
-                 <p>rating: {{ review.rating }}</p>
-                 <p>Review: {{ review.review }}</p>
-                 <p>Date: {{ review.date | date }}</p>
+                 <p>
+                   <span [ngStyle]="{ 'font-weight': 'bold' }">rating:</span>
+                   {{ review.rating }}
+                 </p>
+                 <p>
+                   <span [ngStyle]="{ 'font-weight': 'bold' }">Review:</span>
+                   {{ review.review }}
+                 </p>
+                 <p>
+                   <span [ngStyle]="{ 'font-weight': 'bold' }"> Date:</span>
+                   {{ review.date | date }}
+                 </p>
                </mat-card-content>
                <mat-card-actions>
                  @if(auth.is_logged_in()&&(review.by.user_id===auth.state$()._id)){
@@ -86,8 +106,7 @@ const THUMBUP_ICON =
                    Delete
                  </button>
 
-                 }@if(auth.is_logged_in()&&
-                 (review.by.user_id!==auth.state$()._id)){
+                 }@if((review.by.user_id!==auth.state$()._id)){
                  <!-- <button>Helpful</button> &nbsp; -->
                  <mat-icon
                    svgIcon="thumbs-up"
@@ -225,7 +244,7 @@ const THUMBUP_ICON =
        _id,
      ]);
    }
-   ngDoCheck() {
-     this.onDeleteReview;
-   }
+  //  ngDoCheck() {
+  //    this.onDeleteReview;
+  //  }
  }

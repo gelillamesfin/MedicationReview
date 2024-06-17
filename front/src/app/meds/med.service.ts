@@ -43,7 +43,7 @@ export class MedService {
     );
   }
 
-  getMedById(_id: string) {
+  getMedById(_id: string|undefined) {
     return this.#http.get<{ success: boolean; data: Medication }>(
       environment['BACKEND-SERVER_URL'] + `/medications/${_id}`
     );

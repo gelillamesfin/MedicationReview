@@ -7,7 +7,7 @@ export const meds_routes: Routes = [
     path: 'add',
     loadComponent: () => import('./add.component').then((c) => c.AddComponent),
   },
-
+ 
   {
     path: 'update/:_id',
     loadComponent: () =>
@@ -21,7 +21,8 @@ export const meds_routes: Routes = [
   },
   {
     path: 'images/:image_id',
-    loadComponent: () => import('./med-pic.component').then((c) => c.MedPicComponent),
+    loadComponent: () =>
+      import('./med-pic.component').then((c) => c.MedPicComponent),
   },
   {
     path: 'reviews',

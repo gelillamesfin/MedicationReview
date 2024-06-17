@@ -1,5 +1,4 @@
-import { Router, Routes } from '@angular/router';
-import { SigninComponent } from './auth/signin.component';
+import { Routes } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 
@@ -15,12 +14,14 @@ import { AuthService } from './auth/auth.service';
 // };
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'signin', pathMatch: 'full' },
+  { path: '', redirectTo: 'medications/list', pathMatch: 'full' },
   {
     path: 'signin',
-    component: SigninComponent,
+    loadComponent: () =>
+      import('./auth/signin.component').then((c) => c.SigninComponent),
     canActivate: [() => !inject(AuthService).is_logged_in()],
   },
+
   {
     path: 'signup',
     loadComponent: () =>
@@ -29,6 +30,13 @@ export const routes: Routes = [
   },
   {
     path: 'medications/list',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./meds/list.component').then((c) => c.ListComponent),
+  },
+  {
+    path: 'http://localhost:4200/',
+    pathMatch: 'full',
     loadComponent: () =>
       import('./meds/list.component').then((c) => c.ListComponent),
   },
@@ -36,7 +44,7 @@ export const routes: Routes = [
   {
     path: 'medications',
     loadChildren: () => import('./meds/med.routes').then((r) => r.meds_routes),
-    //  canActivate: [() => inject(AuthService).is_logged_in()],
+     
   },
-  { path: '**', redirectTo: 'medications/list' },
+  { path: '**', redirectTo: '' },
 ];

@@ -58,14 +58,11 @@ import { NgClass, NgStyle } from '@angular/common';
 
     }
     <router-outlet />
+ 
+    
   `,
   styles: [
     `
-      // nav > ul > li {
-      //   display: inline;
-      //   padding-right: 20px;
-      // }
-
       .header {
         display: flex;
         justify-content: center;
@@ -74,7 +71,6 @@ import { NgClass, NgStyle } from '@angular/common';
       * {
         margin: 0;
         padding: 0;
-        // box-sizing: border-box;
       }
       .navbar {
         display: flex;
@@ -107,6 +103,15 @@ import { NgClass, NgStyle } from '@angular/common';
       .navbar-right li a:hover {
         background-color: #555;
       }
+      // html,
+      // body {
+      //   height: 100%;
+      //   margin: 0;
+      //   padding: 0;
+      // }
+
+    
+
     `,
   ],
 })
