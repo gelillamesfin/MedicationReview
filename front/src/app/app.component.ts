@@ -84,13 +84,11 @@ import { NgClass, NgStyle } from '@angular/common';
         display: flex;
         align-items: center;
       }
-
-      .navbar-left li,
+    .navbar-left li,
       .navbar-right li {
         margin-right: 10px;
       }
-
-      .navbar-left li a,
+     .navbar-left li a,
       .navbar-right li a {
         color: #fff;
         text-decoration: none;
@@ -98,20 +96,10 @@ import { NgClass, NgStyle } from '@angular/common';
         border-radius: 5px;
         transition: background-color 0.3s ease;
       }
-
-      .navbar-left li a:hover,
+    .navbar-left li a:hover,
       .navbar-right li a:hover {
         background-color: #555;
       }
-      // html,
-      // body {
-      //   height: 100%;
-      //   margin: 0;
-      //   padding: 0;
-      // }
-
-    
-
     `,
   ],
 })

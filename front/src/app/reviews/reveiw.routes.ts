@@ -1,9 +1,5 @@
 import { Routes } from "@angular/router";
-
-
-
 export const reviews_routes: Routes = [
-  
   {
     path: 'add/:_id',
     loadComponent: () =>

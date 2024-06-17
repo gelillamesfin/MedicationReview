@@ -37,7 +37,7 @@ export class AddComponent {
         updateOn: 'blur',
       },
     ],
-    generic_name: ['', Validators.required],
+    generic_name: ['',   Validators.required],
     medication_class: ['', Validators.required],
     availability: ['', Validators.required],
     image: '',
@@ -71,10 +71,9 @@ export class AddComponent {
     formData.append('medication_image', this.file);
 
     this.#medService.addMed(formData).subscribe((response) => {
-      console.log(response.data.image, 'image data from on add response data ');
       if (response.success) {
         this.#notification.success(
-          `${this.firstFormGroup.value.medication_class} added successfully`
+          `${this.firstFormGroup.value.name} added successfully`
         );
         this.#router.navigate(['', 'medications', 'list']);
       } else {
@@ -85,18 +84,5 @@ export class AddComponent {
 
   validatorAsync(control: AbstractControl): any {
      return this.#medService.verify({name:this.name.value})
-
-     
-  
-    // let entered = control.get('name')?.value;
-    // let first_letter=entered?.charAt(0)
-    // let res=this.#medService.getMeds$(first_letter).subscribe(response=>{
-    //   if(response.success){
-    //     return null;
-    //   }else {
-    //     return ({medExists:true})
-    //   return response.data;
-    //   }
-    // })
   }
 }

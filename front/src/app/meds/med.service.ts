@@ -23,13 +23,8 @@ export const initalMedState: Medication = {
 })
 export class MedService {
   $meds = signal<Medication[]>([initalMedState]);
-  // allMeds$= signal<any>([initalMedState]);
   readonly #http = inject(HttpClient);
-
-
-
-
-  getMeds$(first_letter: string = 'A') {
+getMeds$(first_letter: string = 'A') {
     return this.#http.get<{ success: boolean; data: Medication[] }>(
       environment['BACKEND-SERVER_URL'] +
         `/medications/?first_letter=${first_letter}`

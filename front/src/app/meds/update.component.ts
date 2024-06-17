@@ -58,8 +58,6 @@ imports: [
   max-width: 350px;
  margin-top:40px
   }
-  
-  
   `,
 })
 export class UpdateComponent {
@@ -78,7 +76,7 @@ export class UpdateComponent {
   });
 
   setFile(event: Event) {
-    this.file = (event.target as HTMLInputElement).files![0]; //get the first file from the obj
+    this.file = (event.target as HTMLInputElement).files![0]; 
   }
 
   constructor() {
@@ -121,7 +119,6 @@ export class UpdateComponent {
   }
   onBack() {
     this.router.navigate(['', 'medications', this._id()]);
-
     this.#notification.warning(`no updates made `);
   }
 }

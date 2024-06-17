@@ -62,11 +62,7 @@ import { NgStyle } from '@angular/common';
       <button (click)="onAdd()" [disabled]="form.invalid">Add</button>&nbsp;
     </div>
   `,
-  styles: `
-  
-//   .example-container mat-form-field + mat-form-field {
-//   margin-left: 8px;
-// } 
+  styles: ` 
 .container{
     display:flex;
     justify-content:center;

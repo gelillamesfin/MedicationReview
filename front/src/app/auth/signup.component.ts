@@ -1,14 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from './auth.service';
-
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MyErrorStateMatcher } from './signupError';
 import { NgStyle } from '@angular/common';
 import { Router } from '@angular/router';
 import { User } from '../meds/medTypes';
-//  import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -67,7 +65,6 @@ import { User } from '../meds/medTypes';
 .example-full-width {
   width: 100%;
  
- //work on centering the input fields 
 
 }
 

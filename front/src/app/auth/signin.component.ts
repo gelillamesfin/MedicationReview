@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgStyle } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signin',
   standalone: true,
@@ -70,24 +71,30 @@ import { Router } from '@angular/router';
 export class SigninComponent {
   readonly #auth = inject(AuthService);
   readonly #router = inject(Router);
+  #notification = inject(ToastrService);
+
   form = inject(FormBuilder).group({
     password: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
   });
 
   onSubmit() {
-    console.log(this.form.value, '.....');
-    this.#auth.signin(this.form.value as User).subscribe((response) => {
-      if (response.success) {
-        const decoded_token = jwtDecode(response.data) as IState;
-        this.#auth.state$.set({
-          _id: decoded_token._id,
-          fullname: decoded_token.fullname,
-          email: decoded_token.email,
-          jwt: response.data,
-        });
-        this.#router.navigate(['', 'medications', 'list']);
-      }
+    this.#auth.signin(this.form.value as User).subscribe({
+      next: (response) => {
+        if (response.success) {
+          const decoded_token = jwtDecode(response.data) as IState;
+          this.#auth.state$.set({
+            _id: decoded_token._id,
+            fullname: decoded_token.fullname,
+            email: decoded_token.email,
+            jwt: response.data,
+          });
+          this.#router.navigate(['', 'medications', 'list']);
+        }
+      },
+      error: (error) => {
+        this.#notification.error(`Invalid Username or Password`);
+      },
     });
   }
 }
