@@ -7,12 +7,16 @@
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper >
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
+    
       <ng-template matStepLabel>Medication Name</ng-template>
       <mat-form-field>
         <mat-label>Name</mat-label>
 
         <input matInput placeholder="Medication Name" formControlName="name" required>
       </mat-form-field>
+        @if(name.hasError('exists')){
+<mat-error> Medicine already  exists </mat-error>
+      }
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>

@@ -7,7 +7,7 @@ export const meds_routes: Routes = [
     path: 'add',
     loadComponent: () => import('./add.component').then((c) => c.AddComponent),
   },
- 
+  
   {
     path: 'update/:_id',
     loadComponent: () =>

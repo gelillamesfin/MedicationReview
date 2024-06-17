@@ -6,7 +6,7 @@ import 'dotenv/config';
 import medicationsRouter from './medications/medications.router.js';
 import usersRouter from './users/users.router.js';
 import { ErrorResponse } from './error.js';
-
+import{verifyMedName} from './medications/medications.controller.js'
 const app = express();
 
 (async function () {
@@ -30,7 +30,6 @@ app.use(json());
 // routes
 app.use('/users', usersRouter);
 app.use('/medications', medicationsRouter);
-
 // Catch all unhandled requests
 app.all('*', async (req, res, next) => next(new ErrorResponse(`Route not found`, 404)));
 

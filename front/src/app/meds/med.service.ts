@@ -64,5 +64,11 @@ export class MedService {
   // getImages(image_id:string){
   //   return this.#http.get<unknown>(environment['BACKEND-SERVER_URL'] +`/medications/images/${image_id}` )
   // }
+  verify(data:{name:string}){
+    return this.#http.post<any>(
+      environment['BACKEND-SERVER_URL'] + `/medications/verify/`,
+      data
+    );
+  }
   constructor() {}
 }
