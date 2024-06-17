@@ -42,18 +42,12 @@ export class AddComponent {
     availability: ['', Validators.required],
     image: '',
   });
-  // {validators:this.validatorAsync}
+
   isLinear = false;
 
   setFile(event: Event) {
     this.file = (event.target as HTMLInputElement).files![0]; //get the first file from the obj
   }
-  // constructor(){
-  //    this.firstFormGroup.controls.name.valueChanges.pipe(debounceTime(1000),
-
-  //   // mergeMap(name=>this.))
-
-  // }
 
   get name() {
     return this.firstFormGroup.controls.name;
@@ -82,7 +76,7 @@ export class AddComponent {
     });
   }
 
-  validatorAsync(control: AbstractControl): any {
+  validatorAsync(control: AbstractControl):Observable<any>{
      return this.#medService.verify({name:this.name.value})
   }
 }

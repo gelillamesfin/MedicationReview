@@ -61,7 +61,7 @@ getMeds$(first_letter: string = 'A') {
   // }
   verify(data:{name:string}){
     return this.#http.post<any>(
-      environment['BACKEND-SERVER_URL'] + `/medications/verify/`,
+      environment['BACKEND-SERVER_URL'] + `/medications/verify`,
       data
     );
   }

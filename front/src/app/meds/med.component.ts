@@ -148,7 +148,6 @@ const THUMBUP_ICON =
    readonly #medService = inject(MedService);
    readonly auth = inject(AuthService);
    readonly #reviewService = inject(ReviewService);
-   // _id = model<string>('');
    _id = input<string>('');
    router = inject(Router);
    med = signal<Medication>({
@@ -179,7 +178,6 @@ const THUMBUP_ICON =
        if (this._id() !== '') {
          this.#medService.getMedById(this._id()).subscribe((response) => {
            this.med.set(response.data);
-           // this.med.reviews=response.data.reviews
          });
        }
      });
@@ -221,7 +219,7 @@ const THUMBUP_ICON =
              if (this._id() !== '') {
                this.#medService.getMedById(this._id()).subscribe((response) => {
                  this.med.set(response.data);
-                 // this.med.reviews=response.data.reviews
+            
                });
              }
              this.router.navigate(['', 'medications', this._id()]);
@@ -244,7 +242,5 @@ const THUMBUP_ICON =
        _id,
      ]);
    }
-  //  ngDoCheck() {
-  //    this.onDeleteReview;
-  //  }
+ 
  }

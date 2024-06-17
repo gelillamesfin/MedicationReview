@@ -5,6 +5,8 @@ import path from "path";
 
 
 export const verifyMedName = async (req, res, next) => {
+    console.log(req.body, "request body is...");
+
   try {
     console.log(req.body,'request body is...')
     const { name } = req.body;
@@ -17,7 +19,8 @@ export const verifyMedName = async (req, res, next) => {
     }
   } catch (e) {
     console.log(e, "error in verify name...");
-   res.status(500).json({error:"from verifymedname"})
+  //  res.status(500).json({error:"from verifymedname"})
+  next(e)
   }
 };
 export const add_medication = async (req, res, next) => {
