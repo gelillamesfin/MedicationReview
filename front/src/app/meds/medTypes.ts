@@ -33,7 +33,7 @@ export type newMed = {
   medication_class: string;
   availability: string;
 };
-//needed a type for input  (update) id
+ 
 export type Med = {
   _id?: string;
   name: string;
@@ -50,3 +50,7 @@ export type NewReview = {
   review: string;
   rating: number;
 };
+
+export type ImageNews={
+path:string
+}

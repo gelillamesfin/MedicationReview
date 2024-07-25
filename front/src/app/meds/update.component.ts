@@ -1,4 +1,4 @@
-import {Component,effect,inject,input,} from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { MedService } from './med.service';
 import { MatCardModule } from '@angular/material/card';
 import { NgClass, NgStyle } from '@angular/common';
@@ -10,7 +10,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-update',
   standalone: true,
-imports: [
+  imports: [
     MatCardModule,
     NgStyle,
     MatIconModule,
@@ -72,11 +72,11 @@ export class UpdateComponent {
     medication_class: ['', Validators.required],
     generic_name: ['', Validators.required],
     availability: ['Prescription', Validators.required],
- image: '',
+    image: '',
   });
 
   setFile(event: Event) {
-    this.file = (event.target as HTMLInputElement).files![0]; 
+    this.file = (event.target as HTMLInputElement).files![0];
   }
 
   constructor() {
@@ -84,13 +84,16 @@ export class UpdateComponent {
       if (this._id())
         this.#medService.getMedById(this._id()).subscribe((response) => {
           this.form.controls.name.patchValue(response.data.name);
-          this.form.controls.medication_class.patchValue(response.data.medication_class);
-          this.form.controls.generic_name.patchValue(response.data.generic_name);
-          this.form.controls.availability.patchValue(response.data.availability);
-          // this.form.controls.image.patchValue(response.data.image?.originalname as string);
-
-
-
+          this.form.controls.medication_class.patchValue(
+            response.data.medication_class
+          );
+          this.form.controls.generic_name.patchValue(
+            response.data.generic_name
+          );
+          this.form.controls.availability.patchValue(
+            response.data.availability
+          );
+          
         });
     });
   }
@@ -110,7 +113,7 @@ export class UpdateComponent {
         .subscribe((response) => {
           if (response.success) {
             this.#notification.success(`updated Successfully`);
-            this.router.navigate(['', 'medications',this._id()]);
+            this.router.navigate(['', 'medications', this._id()]);
           } else {
             this.#notification.error(`Failed updating`);
           }

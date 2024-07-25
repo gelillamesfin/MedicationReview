@@ -46,7 +46,9 @@ import { ToastrService } from 'ngx-toastr';
 
       <button mat-raised-button type="submit" [disabled]="form.invalid">
         Submit
-      </button>
+      </button> 
+     
+      <footer></footer>
     </form>
   `,
   styles: `

@@ -39,7 +39,7 @@ import { NgStyle } from '@angular/common';
             placeholder="how did it help?"
             formControlName="review"
           />
-          <mat-hint align="end">{{ value().length }}/100</mat-hint>
+          <mat-hint align="end">{{value().length }}/100</mat-hint>
         </mat-form-field>
         <br />
         <mat-form-field>
@@ -81,12 +81,13 @@ export class AddReviewComponent {
     review: ['', Validators.required],
     rating: [0, Validators.required],
   });
-  protected readonly value = signal('');
 
-  protected onInput(event: Event) {
+  protected readonly value = signal('');
+ protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
-    console.log(this.form.value, 'inside....');
+   
   }
+
   onAdd() {
     console.log(this.form.value, 'inside');
 

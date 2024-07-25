@@ -14,11 +14,15 @@
 
         <input matInput placeholder="Medication Name" formControlName="name" required>
       </mat-form-field>
+      @if(name.hasError('required')){
+<mat-error>Name is required</mat-error>
+      }
         @if(name.hasError('exists')){
 <mat-error> Medicine already  exists </mat-error>
-      }
+      } 
+        
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext [disabled]="!firstFormGroup.dirty">Next</button>
       </div>
     </form>
   </mat-step>

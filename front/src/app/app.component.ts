@@ -5,6 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgClass, NgStyle } from '@angular/common';
+import { MedService } from './meds/med.service';
 
 @Component({
   selector: 'app-root',
@@ -106,7 +107,7 @@ import { NgClass, NgStyle } from '@angular/common';
 export class AppComponent {
   readonly auth = inject(AuthService);
   readonly #router = inject(Router);
-
+ 
   logout() {
     this.auth.state$.set(initalState);
     this.#router.navigate(['signin']);

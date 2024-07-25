@@ -2,11 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Medication, newMed } from './medTypes';
- 
-
-
-
-export const initalMedState: Medication = {
+ export const initalMedState: Medication = {
   name: '',
   first_letter: '',
   generic_name: '',
@@ -56,14 +52,9 @@ getMeds$(first_letter: string = 'A') {
       environment['BACKEND-SERVER_URL'] + `/medications/${_id}`
     );
   }
-  // getImages(image_id:string){
-  //   return this.#http.get<unknown>(environment['BACKEND-SERVER_URL'] +`/medications/images/${image_id}` )
-  // }
-  verify(data:{name:string}){
-    return this.#http.post<any>(
-      environment['BACKEND-SERVER_URL'] + `/medications/verify`,
-      data
-    );
+ 
+  verify(name:string){
+    return this.#http.get<{exists:boolean}>(environment['BACKEND-SERVER_URL'] + `/medications/verify/${name}`);
   }
   constructor() {}
 }

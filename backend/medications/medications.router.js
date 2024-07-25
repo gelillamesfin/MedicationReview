@@ -18,7 +18,7 @@ import { checkToken } from '../users/users.middleware.js';
 
 const router = Router();
 
-router.post('/verify', verifyMedName);
+router.get('/verify/:name', verifyMedName);
 router.get('/images/:image_id', get_image_by_image_id);
 router.post('/', multer({ dest: 'uploads/' }).single('medication_image'), checkToken, add_medication);
 

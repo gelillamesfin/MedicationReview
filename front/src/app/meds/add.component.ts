@@ -37,6 +37,12 @@ export class AddComponent {
         updateOn: 'blur',
       },
     ],
+    // added_by:{user_id:'',
+      
+      
+    //   name:['',Validators.required],
+    // email:['',{validators:[Validators.required,Validators.email]}]
+    // },
     generic_name: ['',   Validators.required],
     medication_class: ['', Validators.required],
     availability: ['', Validators.required],
@@ -76,7 +82,7 @@ export class AddComponent {
     });
   }
 
-  validatorAsync(control: AbstractControl):Observable<any>{
-     return this.#medService.verify({name:this.name.value})
-  }
+  validatorAsync(control: AbstractControl) {
+return this.#medService.verify(control.value)
+}
 }

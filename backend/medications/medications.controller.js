@@ -5,17 +5,13 @@ import path from "path";
 
 
 export const verifyMedName = async (req, res, next) => {
-    console.log(req.body, "request body is...");
-
   try {
-    console.log(req.body,'request body is...')
-    const { name } = req.body;
+    const {name} = req.params.name;
     const results = await Medication.findOne({name}).lean();
-    console.log(results.name, results,"im results.name and should be name of med ");
     if (!results) {
-      res.status(200).json({exists:false});
+      res.status(200).json({esxists:false});
     } else {
-      res.status(200).json({ exists: true });
+      res.status(200).json({ exists:true});
     }
   } catch (e) {
     console.log(e, "error in verify name...");
