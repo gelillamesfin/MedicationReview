@@ -19,11 +19,6 @@ export const meds_routes: Routes = [
     path: ':_id',
     loadComponent: () => import('./med.component').then((c) => c.MedComponent),
   },
-  // {
-  //   path: 'images/:image_id',
-  //   loadComponent: () =>
-  //     import('./med-pic.component').then((c) => c.MedPicComponent),
-  // },
   {
     path: 'reviews',
     loadChildren: () =>

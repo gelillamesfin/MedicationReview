@@ -19,31 +19,38 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   ],
 
   template: `
-    <div class="card-container">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <span [ngStyle]="{ 'font-weight': 'bold' }"> Name: </span><br />
-        <input placeholder="name" formControlName="name" /><br />
+    <div class="updateBody">
+      <div class="card-container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <span [ngStyle]="{ 'font-weight': 'bold' }"> Name: </span><br />
+          <input placeholder="name" formControlName="name" /><br />
 
-        <span [ngStyle]="{ 'font-weight': 'bold' }"> medication class: </span
-        ><br />
-        <textarea
-          placeholder="medication_class"
-          formControlName="medication_class"
-        ></textarea>
-        <br />
-        <span [ngStyle]="{ 'font-weight': 'bold' }"> generic Name: </span><br />
+          <span [ngStyle]="{ 'font-weight': 'bold' }"> medication class: </span
+          ><br />
+          <textarea
+            placeholder="medication_class"
+            formControlName="medication_class"
+          ></textarea>
+          <br />
+          <span [ngStyle]="{ 'font-weight': 'bold' }"> generic Name: </span
+          ><br />
 
-        <input
-          placeholder="generic_name"
-          formControlName="generic_name"
-        /><br />
+          <input
+            placeholder="generic_name"
+            formControlName="generic_name"
+          /><br />
 
-        <input type="file" formControlName="image" (change)="setFile($event)" />
-        <p></p>
+          <input
+            type="file"
+            formControlName="image"
+            (change)="setFile($event)"
+          />
+          <p></p>
 
-        <button mat-button color="primary" type="submit">Save</button>
-        <button mat-button color="accent" (click)="onBack()">Back</button>
-      </form>
+          <button mat-button color="primary" type="submit">Save</button>
+          <button mat-button color="accent" (click)="onBack()">Back</button>
+        </form>
+      </div>
     </div>
   `,
   styles: `
@@ -51,13 +58,15 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
     display:flex;
     justify-content:space-around;
     align-items:center;
-    margin-top:40px
- 
-  }
-  .example-card {
-  max-width: 350px;
- margin-top:40px
-  }
+   margin-top:40px;
+   margin-bottom:40px
+}
+.updateBody{
+ min-height:80vh;
+    display: flex;
+    flex-direction: column;
+}
+
   `,
 })
 export class UpdateComponent {
@@ -93,7 +102,6 @@ export class UpdateComponent {
           this.form.controls.availability.patchValue(
             response.data.availability
           );
-          
         });
     });
   }

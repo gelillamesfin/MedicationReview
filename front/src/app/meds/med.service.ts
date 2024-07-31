@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Medication, newMed } from './medTypes';
+import { Medication} from './medTypes';
  export const initalMedState: Medication = {
   name: '',
   first_letter: '',

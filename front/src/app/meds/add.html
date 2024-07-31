@@ -1,9 +1,7 @@
 
 <h1 style="display:flex;justify-content:center;align-items:center;" > FDA Approved Drugs Only  </h1>
 <div style="display:flex;justify-content:center;align-items:center;"> 
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button> -->
+
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper  style="background-color: #ffe6e6;">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">

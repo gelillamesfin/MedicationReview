@@ -46,6 +46,7 @@ const THUMBUP_ICON =
 
             <img
               mat-card-image
+              [ngStyle]="{ width: '500px' }"
               src="http://localhost:3000/medications/images/{{
                 med().image?._id
               }}"
@@ -84,8 +85,9 @@ const THUMBUP_ICON =
             <p [ngStyle]="{ 'font-weight': 'bold', 'font-size': '40px' }">
               Reviews
             </p>
-
-            @for(review of med().reviews; track review){
+            @if(med().reviews.length===0){
+            <p>No reviews yet. Be the first to review</p>
+            } @for(review of med().reviews; track review){
             <div clss="review">
               <mat-card-header>
                 <mat-card-title
@@ -114,15 +116,34 @@ const THUMBUP_ICON =
                 <button (click)="onDeleteReview(med()._id, review._id)">
                   Delete
                 </button>
-
+                <!-- 
                 }@if((review.by.user_id!==auth.state$()._id)){
+                <button
+                  (click)="onLike()"
+                  [ngStyle]="{
+                    outline: 'none',
+                    border: 'none',
+                    'background-color': '#ffe6e6'
+                  }"
+                >
+                  <mat-icon
+                    svgIcon="thumbs-up"
+                    aria-hidden="false"
+                    aria-label="Example thumbs up SVG icon"
+                  ></mat-icon>
+                </button>
+                &nbsp;&nbsp;
 
-                <mat-icon
-                  svgIcon="thumbs-up"
-                  aria-hidden="false"
-                  aria-label="Example thumbs up SVG icon"
-                ></mat-icon>
-                &nbsp;&nbsp; <button>Report</button>&nbsp; }
+                <button
+                  [ngStyle]="{
+                    outline: 'none',
+                    border: 'none',
+                    'background-color': '#ffe6e6'
+                  }"
+                >
+                  {{ likeCount }}</button
+                >&nbsp; -->
+                }
               </mat-card-actions>
             </div>
 
@@ -134,7 +155,9 @@ const THUMBUP_ICON =
   `,
   styles: `
   .mat-card-image{
-align-item:center;
+  // align-items:center;
+  width:100%;
+  height:100%
   }
   .card-container{
     display:flex;
@@ -158,6 +181,9 @@ export class MedComponent {
   readonly #medService = inject(MedService);
   readonly auth = inject(AuthService);
   readonly #reviewService = inject(ReviewService);
+  likeCount = 1;
+  average = 0;
+  isLiked = false;
   _id = input<string>('');
   router = inject(Router);
   med = signal<Medication>({
@@ -192,6 +218,7 @@ export class MedComponent {
       }
     });
   }
+
   onEdit(_id: any) {
     if (_id) {
       this.router.navigate(['', 'medications', 'update', _id]);
@@ -199,7 +226,15 @@ export class MedComponent {
       this.#notification.error('something went wrong');
     }
   }
-
+  onLike() {
+    if (this.isLiked) {
+      this.likeCount -= 1;
+      // this.isLiked=false
+    } else {
+      this.likeCount += 1;
+    }
+    this.isLiked = !this.isLiked;
+  }
   onDelete(medication_id: any) {
     const confirmation: any = confirm('are you sure ');
     if (medication_id && confirmation) {

@@ -55,19 +55,12 @@ export interface Tile {
       <h2 [ngStyle]="{ 'margin-left': '30px' }">Most Common Drugs</h2>
       @for(med of $meds(); track med._id){
       <div class="meds">
-        <a
-          [routerLink]="['', 'medications', med._id]"
-          class="medslink"
-         
-        >
-       <li>   {{ med.name }}</li></a
+        <a [routerLink]="['', 'medications', med._id]" class="medslink">
+          <li>{{ med.name }}</li></a
         >
       </div>
       }
-      <div
-        [style]="{
-          'margin-top': '70px',
-          'margin-left': '30px',
+      <div [ngStyle]="{'margin-top': '70px',  'margin-left': '30px',
           padding: '500'
         }"
       >
@@ -228,7 +221,7 @@ export interface Tile {
           </video>
         </div>
         <div style="margin-left: 50px;">
-          <h3>Dietary Supplements: What You Need to Know</h3>
+          <h3>Medication safety : What You Need to Know</h3>
           <br />
           <p>
             Drugs are classified in multiple ways. One of the key divisions is
@@ -257,7 +250,7 @@ export interface Tile {
           </video>
         </div>
         <div style="margin-left: 50px;">
-          <h3>Dietary Supplements: What You Need to Know</h3>
+          <h3> Know your Medication: What You Need to Know</h3>
           <br />
           <p>
             Before leaving the pharmacy it’s important to have a clear
