@@ -44,7 +44,6 @@ export const routes: Routes = [
   {
     path: 'medications',
     loadChildren: () => import('./meds/med.routes').then((r) => r.meds_routes),
-     
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'signup' },
 ];

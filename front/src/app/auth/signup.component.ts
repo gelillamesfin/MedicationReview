@@ -13,68 +13,49 @@ import { User } from '../meds/medTypes';
   standalone: true,
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, NgStyle],
   template: `
-    <form class="example-form" [formGroup]="form" (submit)="onSubmit()">
-      <p>Sign-up</p>
-      <mat-form-field class="example-full-width">
-        <mat-label>Email</mat-label>
-        <input
-          type="email"
-          matInput
-          formControlName="email"
-          [errorStateMatcher]="matcher"
-          placeholder="Ex.pat@example.com"
-        />
-        <mat-hint>Enter a valid email</mat-hint>
-        @if (form.hasError('email') && !form.hasError('required')) {
-        <mat-error>Please enter a valid email address</mat-error>
-        } @if (form.hasError('required')) {
-        <mat-error>Email is <strong>required</strong></mat-error>
-        }
-      </mat-form-field>
+    <div class="background-container">
+      <div class="content">
+        <form class="example-form" [formGroup]="form" (submit)="onSubmit()">
+          <p style="color:black">Sign-up</p>
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              formControlName="email"
+              [errorStateMatcher]="matcher"
+              placeholder="Ex.pat@example.com"
+            />
+            @if (form.hasError('email') && !form.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+            } @if (form.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Full Name</mat-label>
-        <input matInput formControlName="fullname" /> </mat-form-field
-      ><br />
+          <mat-form-field class="example-full-width">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="fullname" /> </mat-form-field
+          ><br />
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Password</mat-label>
-        <input
-          type="password"
-          matInput
-          formControlName="password"
-          placeholder="password"
-        />
-      </mat-form-field>
-      <button mat-raised-button type="submit" [disabled]="form.invalid">
-        Submit
-      </button>
-    </form>
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              placeholder="password"
+            />
+          </mat-form-field>
+          <button mat-raised-button type="submit" [disabled]="form.invalid">
+            Submit
+          </button>
+        </form>
+      </div>
+      
+    </div>
   `,
-  styles: `
-  
-  .example-form {
-  min-width: 150px;
-  max-width: 350px;
-  width: 100%;
-  margin-Left:40%;
- 
-
-}
-
-.example-full-width {
-  width: 100%;
- 
-
-}
-
-.form{
-  display:flex;
-
-}
-
-  
-  `,
+  styleUrl: './signincomponent.css',
 })
 export class SignupComponent {
   readonly #auth = inject(AuthService);

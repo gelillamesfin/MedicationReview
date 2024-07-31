@@ -1,0 +1,137 @@
+.doctorParagraph {
+  background-color: #f7f7f7;
+  padding: 48px;
+  border-radius: 24px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  margin-bottom: 100px;
+}
+.sign-up-banner {
+  background-color: #f7f7f7;
+  padding: 48px;
+  border-radius: 24px;
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: 1134px;
+  margin-left: 250px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+
+  margin: 0 auto;
+  margin-left: 250px;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.footer-column h3 {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+.container {
+  min-height: 100%;
+  background-color: #ffe6e6;
+}
+.newsCard {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: auto;
+  gap: 20px;
+}
+.newsImage {
+  display: flex;
+  width: 350px;
+  height: 200px;
+  align-items: center;
+}
+.example-card {
+  max-width: 400px;
+  margin: 10px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.meds {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 2px;
+  margin-left: 30px;
+}
+.medslink {
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+  text-decoration: none;
+}
+.medslink:hover {
+  text-decoration: underline;
+  color: rgb(221, 75, 123);
+}
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  padding: 20px;
+}
+@media (max-width: 768px) {
+  .sign-up-banner {
+    padding: 16px !important;
+  }
+
+  .footer-container {
+    flex-direction: column !important; /* Stack columns vertically on small screens */
+    gap: 10px;
+  }
+
+  .footer-column {
+    min-width: 100% !important; /* Full width for columns */
+    text-align: center !important;
+  }
+
+  .newsCard {
+    flex-direction: column !important; /* Stack items vertically */
+  }
+
+  .newsImage {
+    width: 100% !important; /* Full width of container */
+    height: auto !important; /* Maintain aspect ratio */
+  }
+}

@@ -10,15 +10,12 @@
   <button mat-menu-item>Profile</button>
   <li><a (click)="logout()">Logout </a></li>
 
-  <!-- <button mat-menu-item>Logout</button> -->
+
 </mat-menu>
 
 <button mat-button [matMenuTriggerFor]="beforeMenu">Medications</button>
 <mat-menu #beforeMenu="matMenu" xPosition="before">
   <li><a [routerLink]="['', 'medications', 'list']">List</a></li>
-
-  <!-- <button mat-menu-item>list</button>
-  <button mat-menu-item>My Meds</button> -->
 </mat-menu>
 
 <button mat-button [matMenuTriggerFor]="afterMenu">After</button>

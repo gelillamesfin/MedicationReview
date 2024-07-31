@@ -37,12 +37,7 @@ export class AddComponent {
         updateOn: 'blur',
       },
     ],
-    // added_by:{user_id:'',
-      
-      
-    //   name:['',Validators.required],
-    // email:['',{validators:[Validators.required,Validators.email]}]
-    // },
+ 
     generic_name: ['',   Validators.required],
     medication_class: ['', Validators.required],
     availability: ['', Validators.required],
