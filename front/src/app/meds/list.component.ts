@@ -56,18 +56,15 @@ export interface Tile {
       @for(med of $meds(); track med._id){
       <div class="meds">
         <a [routerLink]="['', 'medications', med._id]" class="medslink">
-          <li>{{ med.name }}</li></a
-        >
+          <li>{{ med.name }}</li></a>
       </div>
       }
       <div [ngStyle]="{'margin-top': '70px',  'margin-left': '30px',
-          padding: '500'
-        }"
-      >
+          'padding': '50'}">
         <hr />
         <h2>Lates News</h2>
         <div class="newsCard">
-          <mat-card class="example-card" appearance="outlined">
+          <mat-card class="example-card" >
             <mat-card-header>
               <mat-card-title-group>
                 <img src="assets/images/Paxlovid.png" class="newsImage" />
@@ -75,7 +72,7 @@ export interface Tile {
             </mat-card-header>
             <mat-card-content>
               <h3>
-                13 Things To Know About Paxlovid, the Latest COVID-19 Pill
+                13 Things To Know About Paxlovid
               </h3>
 
               Paxlovid, an oral antiviral pill that can be taken at home, is the
@@ -90,7 +87,7 @@ export interface Tile {
               >
             </mat-card-content>
           </mat-card>
-          <mat-card class="example-card" appearance="outlined">
+          <mat-card class="example-card" >
             <mat-card-header>
               <mat-card-title-group>
                 <img src="assets/images/warning.png" class="newsImage" />
@@ -111,7 +108,7 @@ export interface Tile {
               >
             </mat-card-content>
           </mat-card>
-          <mat-card class="example-card" appearance="outlined">
+          <mat-card class="example-card">
             <mat-card-header>
               <mat-card-title-group>
                 <img src="assets/images/Cardiology.png" class="newsImage" />
@@ -131,7 +128,7 @@ export interface Tile {
               </a>
             </mat-card-content>
           </mat-card>
-          <mat-card class="example-card" appearance="outlined">
+          <mat-card class="example-card">
             <mat-card-header>
               <mat-card-title-group>
                 <img

@@ -129,7 +129,7 @@ import { MedService } from './meds/med.service';
               </ul>
             </div>
           </div>
-          <p [ngStyle]="{ 'margin-left': '250px' }">
+          <p [ngStyle]="{ 'margin-left': '20px' }">
             © 2005 - 2024 WebMD LLC, an Internet Brands company. All rights
             reserved. WebMD does not provide medical advice, diagnosis or
             treatment. See additional information.
