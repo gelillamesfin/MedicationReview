@@ -1,101 +1,116 @@
-
-<h1 style="display:flex;justify-content:center;align-items:center;" > FDA Approved Drugs Only  </h1>
-<div style="display:flex;justify-content:center;align-items:center;"> 
-
-<mat-stepper orientation="vertical" [linear]="isLinear" #stepper  style="background-color: #ffe6e6;">
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-    
-      <ng-template matStepLabel>Medication Name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-
-        <input matInput placeholder="Medication Name" formControlName="name" required>
-      </mat-form-field>
-      @if(name.hasError('required')){
-<mat-error>Name is required</mat-error>
-      }
-        @if(name.hasError('exists')){
-<mat-error> Medicine already  exists </mat-error>
-      } 
-        
-      <div>
-        <button mat-button matStepperNext [disabled]="!firstFormGroup.dirty">Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Generic Name</ng-template>
-      <mat-form-field>
-        <mat-label>Generic Name </mat-label>
-        <input matInput formControlName="generic_name" placeholder="generic name"
-               required>
-      </mat-form-field>
-       <!-- @if(this.firstFormGroup.errors?.['medExists']){
-<p>Med exists</p>
- } -->
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
+<h1 style="display: flex; justify-content: center; align-items: center">
+  FDA Approved Drugs Only
+</h1>
+<div style="display: flex; justify-content: center; align-items: center">
+  <mat-stepper
+    orientation="vertical"
+    [linear]="isLinear"
+    #stepper
+    style="background-color: #ffe6e6"
+  >
     <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Medication Class</ng-template>
-      <mat-form-field>
-        <mat-label>medication class </mat-label>
-        <input matInput placeholder="medication class" formControlName="medication_class" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Medication Name</ng-template>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
 
+          <input
+            matInput
+            placeholder="Medication Name"
+            formControlName="name"
+            required
+          />
+        </mat-form-field>
+        @if(name.hasError('required')){
+        <mat-error>Name is required</mat-error>
+        } @if(name.hasError('exists')){
+        <mat-error> Medicine already exists </mat-error>
+        }
+
+        <div>
+          <button mat-button matStepperNext [disabled]="!firstFormGroup.dirty">
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Generic Name</ng-template>
+        <mat-form-field>
+          <mat-label>Generic Name </mat-label>
+          <input
+            matInput
+            formControlName="generic_name"
+            placeholder="generic name"
+            required
+          />
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Medication Class</ng-template>
+        <mat-form-field>
+          <mat-label>medication class </mat-label>
+          <input
+            matInput
+            placeholder="medication class"
+            formControlName="medication_class"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
 
     <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>availability</ng-template>
-      <mat-form-field>
-        <mat-label>OTC/RX</mat-label>
-        <input matInput placeholder="otc/rx" formControlName="availability" required>
-      </mat-form-field>
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>availability</ng-template>
+        <mat-form-field>
+          <mat-label>OTC/RX</mat-label>
+          <input
+            matInput
+            placeholder="otc/rx"
+            formControlName="availability"
+            required
+          />
+        </mat-form-field>
 
-     
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step> 
-<!-- image starts here -->
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- image starts here -->
 
-    <mat-step [stepControl]="firstFormGroup" >
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Image</ng-template>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Image</ng-template>
 
         <input type="file" formControlName="image" (change)="setFile($event)" />
-      <!-- <button type="submit" (click)="onUpload()">upload</button> -->
 
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="onAdd()">Add</button>
       </div>
-    </form>
-  </mat-step> 
-
-
-
-
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-      <button mat-button (click)="onAdd()">Add</button>
-
-    </div>
-  </mat-step>
-</mat-stepper>
+    </mat-step>
+  </mat-stepper>
 </div>
