@@ -2,9 +2,6 @@
 ## Medication Reviews/Side-Effects application:
 The application helps users to review and report medications side effects.
 
-<p align="center">
-  <img src="./alphabets.png" />
-</p>
 
 1. Guests browse the medications by the first letter. Display all the alphabet letters, when a letter is clicked all medications starting with the letter are fetched and displayed. All guests can read the reviews. You may use the [Drugs.com](https://www.drugs.com/drug_information.html) to see sample data.
 2. Guests will need to signup and signin before they can add medications or reviews.
