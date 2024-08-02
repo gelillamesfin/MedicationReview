@@ -6,6 +6,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { NgStyle } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { AuthService } from '../auth/auth.service';
 
 export interface Tile {
   color: string;
@@ -56,24 +57,28 @@ export interface Tile {
       @for(med of $meds(); track med._id){
       <div class="meds">
         <a [routerLink]="['', 'medications', med._id]" class="medslink">
-          <li>{{ med.name }}</li></a>
+          <li>{{ med.name }}</li></a
+        >
       </div>
       }
-      <div [ngStyle]="{'margin-top': '70px',  'margin-left': '30px',
-          'padding': '50'}">
+      <div
+        [ngStyle]="{
+          'margin-top': '70px',
+          'margin-left': '30px',
+          padding: '50'
+        }"
+      >
         <hr />
         <h2>Lates News</h2>
         <div class="newsCard">
-          <mat-card class="example-card" >
+          <mat-card class="example-card">
             <mat-card-header>
               <mat-card-title-group>
                 <img src="assets/images/Paxlovid.png" class="newsImage" />
               </mat-card-title-group>
             </mat-card-header>
             <mat-card-content>
-              <h3>
-                13 Things To Know About Paxlovid
-              </h3>
+              <h3>13 Things To Know About Paxlovid</h3>
 
               Paxlovid, an oral antiviral pill that can be taken at home, is the
               go-to treatment for COVID-19. If you are at high risk for severe
@@ -87,7 +92,7 @@ export interface Tile {
               >
             </mat-card-content>
           </mat-card>
-          <mat-card class="example-card" >
+          <mat-card class="example-card">
             <mat-card-header>
               <mat-card-title-group>
                 <img src="assets/images/warning.png" class="newsImage" />
@@ -156,6 +161,8 @@ export interface Tile {
         </div>
       </div>
       <hr />
+      @if(!auth.is_logged_in()){
+
       <div class="sign-up-banner">
         <div class="image-wrapper">
           <img src="assets/images/profile.png" />
@@ -182,6 +189,35 @@ export interface Tile {
           </div>
         </div>
       </div>
+      }@else{
+      <div class="sign-up-banner">
+        <div class="image-wrapper">
+          <img src="assets/images/profile.png" />
+        </div>
+        <div [ngStyle]="{ 'margin-left': '100px' }">
+          <h2>Find Primary Care Doctor</h2>
+          <p>
+            Staying healthy is more than just going to the doctor when you’re
+            sick. It’s about having a healthcare team that not only addresses
+            your health concerns and illnesses but also takes a proactive
+            approach to help you stay healthy.
+          </p>
+          <div>
+            <a
+              href="https://www.uhc.com/member-resources/choosing-a-doctor"
+              [ngStyle]="{
+                'border-radius': '24px',
+                'background-color': 'pink',
+                padding: '10px 30px',
+                color: 'black'
+              }"
+            >
+              Find a Doctor
+            </a>
+          </div>
+        </div>
+      </div>
+      }
       <div class="doctorParagraph">
         <hr />
         <img src="assets/images/bloomdrink.png" style="width: 500px;" />
@@ -207,7 +243,6 @@ export interface Tile {
             information.
           </p>
         </div>
-
       </div>
       <div class="doctorParagraph">
         <hr />
@@ -247,7 +282,7 @@ export interface Tile {
           </video>
         </div>
         <div style="margin-left: 50px;">
-          <h3> Know your Medication: What You Need to Know</h3>
+          <h3>Know your Medication: What You Need to Know</h3>
           <br />
           <p>
             Before leaving the pharmacy it’s important to have a clear
@@ -281,9 +316,9 @@ export interface Tile {
 })
 export class ListComponent {
   readonly medService = inject(MedService);
+  readonly auth = inject(AuthService);
 
   $meds = signal<Medication[]>([]);
-
   constructor() {
     this.medService.getMeds$().subscribe((response) => {
       this.$meds.set(response.data);

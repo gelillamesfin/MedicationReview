@@ -5,7 +5,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  margin-bottom:0px;
+  margin-bottom: 0px;
 }
 .sign-up-banner {
   background-color: #f7f7f7;
@@ -62,10 +62,11 @@
 .container {
   min-height: 100%;
   background-color: #ffe6e6;
+  position: relative;
 }
 .newsCard {
   display: flex;
-  max-width:100%;
+  max-width: 100%;
   /* flex-wrap:nowrap; */
   justify-content: center;
   padding: 10px;
@@ -76,14 +77,13 @@
   display: flex;
   width: 300px;
   height: 150px;
-  align-items: center;
-  justify-content: center;
-  margin-right:40px;
+
+  margin-right: 150px;
 }
 .example-card {
-  flex:1 1 calc(25%-16px);
-  box-sizing:border-box;
-  max-width:24%;
+  flex: 1 1 calc(25%-16px);
+  box-sizing: border-box;
+  max-width: 24%;
   margin: 10px;
 }
 
@@ -93,7 +93,7 @@
 
 .meds {
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 2px;
   margin-left: 30px;
@@ -121,22 +121,22 @@
     padding: 16px !important;
   }
   .footer-container {
-    flex-direction: column !important;  
+    flex-direction: column !important;
     gap: 10px;
   }
 
   .footer-column {
-    min-width: 100% !important;  
+    min-width: 100% !important;
     text-align: center !important;
   }
 
   .newsCard {
-    flex-direction: column !important;  
+    flex-direction: column !important;
     align-items: center !important;
-    gap:10px;
+    gap: 10px;
   }
- .newsImage {
-    width: 100% !important;  
+  .newsImage {
+    width: 100% !important;
     height: auto !important;
   }
 }

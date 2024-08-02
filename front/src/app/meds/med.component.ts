@@ -2,13 +2,13 @@ import { Component, effect, inject, input, signal } from '@angular/core';
 import { MedService } from './med.service';
 import { MatCardModule } from '@angular/material/card';
 import { DatePipe, NgClass, NgStyle } from '@angular/common';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule} from '@angular/material/icon';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Medication } from './medTypes';
 import { ReviewService } from '../reviews/review.service';
-import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-med',
@@ -156,7 +156,7 @@ align-items:center;
      display:flex;
     justify-content:center;
     align-items:center;
-margin-bottom:400px
+// margin-bottom:100%
     }
   .star{
   color:orange;

@@ -5,7 +5,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgClass, NgStyle } from '@angular/common';
-import { MedService } from './meds/med.service';
 
 @Component({
   selector: 'app-root',
@@ -56,11 +55,10 @@ import { MedService } from './meds/med.service';
         <ul class="navbar-right">
           <li><a [routerLink]="['', 'medications', 'list']">Medications</a></li>
         </ul>
-      </nav>}
+      </nav>
+      }
 
-      
-    
-      <router-outlet />
+      <router-outlet [ngStyle]="{ position: 'relative' }" />
 
       <footer>
         <div class="text-center p-3">
@@ -145,9 +143,8 @@ import { MedService } from './meds/med.service';
         background-color: #333;
         color: #fff;
         padding: 20px;
-        position: absolute;
+        margin-top: auto;
         width: 98%;
-      
       }
       .footer-container {
         display: flex;
@@ -186,6 +183,8 @@ import { MedService } from './meds/med.service';
       .parent {
         background-color: #ffe6e6;
         height: 100%;
+        display:flex;
+        flex-direction:column
       }
       .header {
         display: flex;
