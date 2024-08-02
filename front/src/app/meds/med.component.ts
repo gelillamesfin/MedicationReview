@@ -10,15 +10,6 @@ import { Medication } from './medTypes';
 import { ReviewService } from '../reviews/review.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
-const THUMBUP_ICON =
-  `
-  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px">
-    <path d="M0 0h24v24H0z" fill="none"/>
-    <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.` +
-  `44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5` +
-  `1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"/>
-  </svg>`;
-
 @Component({
   selector: 'app-med',
   standalone: true,
@@ -49,6 +40,7 @@ const THUMBUP_ICON =
               src="http://localhost:3000/medications/images/{{
                 med().image?._id
               }}"
+              style="width:250px"
             />
           </mat-card-title-group>
         </mat-card-header>
@@ -84,8 +76,11 @@ const THUMBUP_ICON =
             <p [ngStyle]="{ 'font-weight': 'bold', 'font-size': '40px' }">
               Reviews
             </p>
+            @if(med().reviews.length===0){
+              No Reviews yet, be the first to review.
+            }@else{
             @for(review of med().reviews; track review){
-            <div class="review">
+           <div class="review">
               <mat-card-header>
                 <mat-card-title
                   [ngStyle]="{ 'font-weight': 'bold', 'font-size': '20px' }"
@@ -117,21 +112,28 @@ const THUMBUP_ICON =
                 @if(auth.is_logged_in()&&(review.by.user_id===auth.state$()._id)){
                 <button
                   (click)="onEditReview(review._id)"
-                  [ngStyle]="{ 'background-color': '#ffe6e6', 'border': 'none','color':'blue' }"
+                  [ngStyle]="{
+                    'background-color': '#ffe6e6',
+                    border: 'none',
+                    color: 'blue'
+                  }"
                 >
                   Edit</button
                 >&nbsp;
                 <button
                   (click)="onDeleteReview(med()._id, review._id)"
-                  [ngStyle]="{ 'background-color': '#ffe6e6', 'border': 'none','color':'blue' }"
+                  [ngStyle]="{
+                    'background-color': '#ffe6e6',
+                    border: 'none',
+                    color: 'blue'
+                  }"
                 >
                   Delete</button
                 >}
               </mat-card-actions>
             </div>
-
-            }
-          </mat-card-content>
+}
+              }  </mat-card-content>
         </div>
       </mat-card>
     </div>
@@ -154,6 +156,7 @@ align-items:center;
      display:flex;
     justify-content:center;
     align-items:center;
+margin-bottom:400px
     }
   .star{
   color:orange;
@@ -194,11 +197,7 @@ export class MedComponent {
     ],
   });
   #notification = inject(ToastrService);
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIconLiteral(
-      'thumbs-up',
-      sanitizer.bypassSecurityTrustHtml(THUMBUP_ICON)
-    );
+  constructor() {
     effect(() => {
       if (this._id() !== '') {
         this.#medService.getMedById(this._id()).subscribe((response) => {

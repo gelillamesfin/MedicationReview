@@ -2,16 +2,6 @@ import { Routes } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 
-// const signin_guard = () => {
-//   const router = inject(Router);
-//   const signed_in = inject(AuthService).is_logged_in();
-//   if (signed_in) {
-//     router.navigate(['', 'meds', 'list']);
-//     return false;
-//   } else {
-//     return true;
-//   }
-// };
 
 export const routes: Routes = [
   { path: '', redirectTo: 'medications/list', pathMatch: 'full' },

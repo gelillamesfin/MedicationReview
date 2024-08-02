@@ -182,8 +182,8 @@ export interface Tile {
           </div>
         </div>
       </div>
-      <hr />
       <div class="doctorParagraph">
+        <hr />
         <img src="assets/images/bloomdrink.png" style="width: 500px;" />
         <div style="margin-left: 50px;">
           <h3>Dietary Supplements: What You Need to Know</h3>
@@ -208,9 +208,9 @@ export interface Tile {
           </p>
         </div>
 
-        <hr />
       </div>
       <div class="doctorParagraph">
+        <hr />
         <div>
           <video controls width="500px" [autoplay]="true" [muted]="true">
             <source src="assets/images/medvideo2.mp4" type="video/mp4" />

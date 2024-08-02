@@ -1,7 +1,7 @@
 <h1 style="display: flex; justify-content: center; align-items: center">
   FDA Approved Drugs Only
 </h1>
-<div style="display: flex; justify-content: center; align-items: center">
+<div style="display: flex; justify-content: center; align-items: center;margin-bottom :50px;">
   <mat-stepper
     orientation="vertical"
     [linear]="isLinear"
@@ -13,7 +13,6 @@
         <ng-template matStepLabel>Medication Name</ng-template>
         <mat-form-field>
           <mat-label>Name</mat-label>
-
           <input
             matInput
             placeholder="Medication Name"
@@ -89,13 +88,11 @@
         </div>
       </form>
     </mat-step>
-    <!-- image starts here -->
-
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Image</ng-template>
 
-        <input type="file" formControlName="image" (change)="setFile($event)" />
+        <input type="file" formControlName="image" (change)="setFile($event)"   style="margin-bottom: 60px;"/>
 
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -103,8 +100,8 @@
       </form>
     </mat-step>
 
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
+    <mat-step >
+      <ng-template matStepLabel style="margin-bottom: 600px;"   >Done</ng-template>
       <p>You are now done.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>

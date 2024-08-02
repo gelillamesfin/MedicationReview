@@ -56,9 +56,10 @@ import { MedService } from './meds/med.service';
         <ul class="navbar-right">
           <li><a [routerLink]="['', 'medications', 'list']">Medications</a></li>
         </ul>
-      </nav>
+      </nav>}
 
-      }
+      
+    
       <router-outlet />
 
       <footer>
@@ -144,12 +145,13 @@ import { MedService } from './meds/med.service';
         background-color: #333;
         color: #fff;
         padding: 20px;
+        position: absolute;
+        width: 98%;
+      
       }
-
       .footer-container {
         display: flex;
         justify-content: center;
-
         margin: 0 auto;
         margin-left: 250px;
       }
@@ -183,6 +185,7 @@ import { MedService } from './meds/med.service';
       }
       .parent {
         background-color: #ffe6e6;
+        height: 100%;
       }
       .header {
         display: flex;
@@ -221,6 +224,46 @@ import { MedService } from './meds/med.service';
       .navbar-left li a:hover,
       .navbar-right li a:hover {
         background-color: #555;
+      }
+      @media (max-width: 768px) {
+        .footer-container {
+          margin-left: 0;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .footer-column {
+          margin: 10px 0;
+        }
+
+        .navbar {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .navbar-left,
+        .navbar-right {
+          flex-direction: column;
+          align-items: center;
+          padding: 0;
+        }
+
+        .navbar-left li,
+        .navbar-right li {
+          margin-bottom: 10px;
+        }
+
+        .navbar-left li a,
+        .navbar-right li a {
+          padding: 10px;
+          border-radius: 0;
+        }
+
+        .footer {
+          position: static;
+          width: 100%;
+          padding: 10px;
+        }
       }
     `,
   ],

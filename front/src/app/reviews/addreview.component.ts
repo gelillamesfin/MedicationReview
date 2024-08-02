@@ -22,10 +22,12 @@ import { NgStyle } from '@angular/common';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    NgStyle
+    NgStyle,
   ],
   template: `
-    <h3 class="container" [ngStyle]="{ color: 'green' }"> Your Review is Valuable!</h3>
+    <h3 class="container" [ngStyle]="{ color: 'green' }">
+      Your Review is Invaluable!
+    </h3>
 
     <br />
     <div class="container">
@@ -39,7 +41,7 @@ import { NgStyle } from '@angular/common';
             placeholder="how did it help?"
             formControlName="review"
           />
-          <mat-hint align="end">{{value().length }}/100</mat-hint>
+          <mat-hint>{{ value().length }}/100</mat-hint>
         </mat-form-field>
         <br />
         <mat-form-field>
@@ -51,15 +53,23 @@ import { NgStyle } from '@angular/common';
             <mat-option value="2">2</mat-option>
             <mat-option value="1">1</mat-option>
           </mat-select>
-          <mat-hint align="end"></mat-hint>
+          <mat-hint></mat-hint>
         </mat-form-field>
       </form>
     </div>
 
     <div class="container">
-      <button (click)="onBack()">Back</button>&nbsp;
+      <button (click)="onBack()" [ngStyle]="{ 'margin-bottom': '500px' }">
+        Back</button
+      >&nbsp;
 
-      <button (click)="onAdd()" [disabled]="form.invalid">Add</button>&nbsp;
+      <button
+        (click)="onAdd()"
+        [disabled]="form.invalid"
+        [ngStyle]="{ 'margin-bottom': '500px' }"
+      >
+        Add</button
+      >&nbsp;
     </div>
   `,
   styles: ` 
@@ -67,7 +77,9 @@ import { NgStyle } from '@angular/common';
     display:flex;
     justify-content:center;
     align-items:center;
+    // height:100%;
  margin-top:20px
+margin-bottom:20px;
   }
   
   `,
@@ -83,9 +95,8 @@ export class AddReviewComponent {
   });
 
   protected readonly value = signal('');
- protected onInput(event: Event) {
+  protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
-   
   }
 
   onAdd() {
@@ -103,6 +114,6 @@ export class AddReviewComponent {
   }
 
   onBack() {
-    this.#router.navigate(['', 'medications',this._id()]);
+    this.#router.navigate(['', 'medications', this._id()]);
   }
 }

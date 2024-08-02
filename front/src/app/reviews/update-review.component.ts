@@ -51,9 +51,17 @@ import { NgStyle } from '@angular/common';
     </div>
 
     <div class="container">
-      <button (click)="onBack()">Back</button>&nbsp;
+      <button (click)="onBack()" [ngStyle]="{ 'margin-bottom': '500px' }">
+        Back</button
+      >&nbsp;
 
-      <button (click)="onSave()" [disabled]="form.invalid">Add</button>&nbsp;
+      <button
+        (click)="onSave()"
+        [disabled]="form.invalid"
+        [ngStyle]="{ 'margin-bottom': '500px' }"
+      >
+        Add</button
+      >&nbsp;
     </div>
   `,
   styles: `
@@ -82,11 +90,9 @@ export class UpdateReviewComponent {
 
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
-    
   }
 
   constructor() {
-  
     effect(() => {
       if (this._id())
         this.#reviewService
@@ -99,7 +105,7 @@ export class UpdateReviewComponent {
 
   onSave() {
     const confirmation = confirm('save changes?');
-    
+
     if (confirmation && this._id()) {
       this.#reviewService
         .updateReview(
@@ -120,7 +126,7 @@ export class UpdateReviewComponent {
   }
 
   onBack() {
-    this.#router.navigate(['', 'medications',this.medication_id()]);
+    this.#router.navigate(['', 'medications', this.medication_id()]);
     this.#notification.warning(`no updates made `);
   }
 }

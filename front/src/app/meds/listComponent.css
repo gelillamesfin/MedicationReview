@@ -5,8 +5,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-
-  margin-bottom: 100px;
+  margin-bottom:0px;
 }
 .sign-up-banner {
   background-color: #f7f7f7;
@@ -19,7 +18,7 @@
   margin-bottom: 50px;
   margin-top: 50px;
 }
-footer {
+/* footer {
   background-color: #333;
   color: #fff;
   padding: 20px;
@@ -59,7 +58,7 @@ footer {
 
 .footer-column ul li a:hover {
   text-decoration: underline;
-}
+} */
 .container {
   min-height: 100%;
   background-color: #ffe6e6;
@@ -121,7 +120,6 @@ footer {
   .sign-up-banner {
     padding: 16px !important;
   }
-
   .footer-container {
     flex-direction: column !important;  
     gap: 10px;
@@ -137,8 +135,7 @@ footer {
     align-items: center !important;
     gap:10px;
   }
-
-  .newsImage {
+ .newsImage {
     width: 100% !important;  
     height: auto !important;
   }

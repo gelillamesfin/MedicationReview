@@ -37,8 +37,8 @@ export class AddComponent {
         updateOn: 'blur',
       },
     ],
- 
-    generic_name: ['',   Validators.required],
+
+    generic_name: ['', Validators.required],
     medication_class: ['', Validators.required],
     availability: ['', Validators.required],
     image: '',
@@ -78,6 +78,6 @@ export class AddComponent {
   }
 
   validatorAsync(control: AbstractControl) {
-return this.#medService.verify(control.value)
-}
+    return this.#medService.verify(control.value);
+  }
 }
